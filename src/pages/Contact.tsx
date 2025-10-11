@@ -26,7 +26,7 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email',
-    detail: 'contact@bigitalis.com',
+    detail: 'issabathily388@gmail.com',
     description: 'Réponse sous 24h garantie',
   },
   {
