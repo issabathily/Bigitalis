@@ -1,0 +1,275 @@
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { 
+  Users, 
+  Target, 
+  Award, 
+  Heart,
+  Lightbulb,
+  Rocket,
+  Shield,
+  Zap
+} from 'lucide-react';
+
+const values = [
+  {
+    icon: Lightbulb,
+    title: 'Innovation',
+    description: 'Nous restons à la pointe des technologies pour offrir des solutions d\'avenir.',
+  },
+  {
+    icon: Heart,
+    title: 'Passion',
+    description: 'Notre équipe porte chaque projet avec passion et engagement personnel.',
+  },
+  {
+    icon: Shield,
+    title: 'Fiabilité',
+    description: 'Des solutions robustes et sécurisées pour votre tranquillité d\'esprit.',
+  },
+  {
+    icon: Zap,
+    title: 'Performance',
+    description: 'Optimisation continue pour des résultats qui dépassent vos attentes.',
+  },
+];
+
+const team = [
+  {
+    name: 'Alexandre Martin',
+    role: 'CEO & Lead Developer',
+    description: '10+ années d\'expérience en développement web et mobile.',
+    image: 'https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=500',
+  },
+  {
+    name: 'Sophie Dubois',
+    role: 'Data Scientist & IA',
+    description: 'Experte en intelligence artificielle et analyse de données.',
+    image: 'https://images.pexels.com/photos/3785079/pexels-photo-3785079.jpeg?auto=compress&cs=tinysrgb&w=500',
+  },
+  {
+    name: 'Thomas Leroy',
+    role: 'UI/UX Designer',
+    description: 'Créateur d\'expériences utilisateur exceptionnelles.',
+    image: 'https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&w=500',
+  },
+];
+
+export default function About() {
+  return (
+    <div className="bg-white pt-20">
+      {/* Hero Section */}
+      <section className="py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div 
+            className="mx-auto max-w-2xl text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+              À propos de <span className="text-orange-500">Bigitalis</span>
+            </h1>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              Depuis notre création, nous accompagnons les entreprises dans leur transformation 
+              digitale avec passion, expertise et innovation.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Story Section */}
+      <section className="py-24 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-6">
+                Notre <span className="text-orange-500">Histoire</span>
+              </h2>
+              <div className="space-y-6 text-lg text-gray-600">
+                <p>
+                  Fondée en 2020 par une équipe d'experts passionnés, Bigitalis est née de la volonté 
+                  de démocratiser l'accès aux technologies avancées pour toutes les entreprises.
+                </p>
+                <p>
+                  Nous croyons fermement que chaque organisation, quelle que soit sa taille, 
+                  mérite des solutions digitales de qualité premium qui lui permettront de se démarquer 
+                  dans un monde de plus en plus connecté.
+                </p>
+                <p>
+                  Aujourd'hui, nous sommes fiers d'avoir accompagné plus de 50 entreprises 
+                  dans leur transformation digitale avec des résultats mesurables et durables.
+                </p>
+              </div>
+            </motion.div>
+            
+            <motion.div
+              className="relative"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <img
+                src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800"
+                alt="Équipe Bigitalis au travail"
+                className="rounded-2xl shadow-xl w-full"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/20 to-transparent rounded-2xl"></div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div 
+            className="mx-auto max-w-2xl text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Nos <span className="text-orange-500">Valeurs</span>
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              Les principes qui guident notre travail au quotidien.
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <motion.div
+                key={value.title}
+                className="text-center group"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8 }}
+              >
+                <div className="flex items-center justify-center w-16 h-16 bg-orange-100 rounded-xl mx-auto mb-6 group-hover:bg-orange-500 transition-colors duration-300">
+                  <value.icon className="w-8 h-8 text-orange-500 group-hover:text-white transition-colors duration-300" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">{value.title}</h3>
+                <p className="text-gray-600">{value.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-24 sm:py-32 bg-gray-50">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div 
+            className="mx-auto max-w-2xl text-center mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Notre <span className="text-orange-500">Équipe</span>
+            </h2>
+            <p className="mt-6 text-lg leading-8 text-gray-600">
+              Des experts passionnés dédiés à votre réussite digitale.
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            {team.map((member, index) => (
+              <motion.div
+                key={member.name}
+                className="text-center group"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -8 }}
+              >
+                <div className="relative mb-6 inline-block">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-32 h-32 rounded-full object-cover mx-auto shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/20 to-transparent rounded-full"></div>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h3>
+                <p className="text-orange-500 font-medium mb-4">{member.role}</p>
+                <p className="text-gray-600">{member.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mission Section */}
+      <section className="py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-3xl px-8 py-16 sm:px-16">
+            <motion.div
+              className="text-center text-white"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <Target className="w-16 h-16 mx-auto mb-8 opacity-80" />
+              <h2 className="text-3xl font-bold sm:text-4xl mb-6">Notre Mission</h2>
+              <p className="text-xl leading-8 opacity-90 max-w-3xl mx-auto">
+                Rendre accessible l'excellence technologique à toutes les entreprises, 
+                en créant des solutions digitales qui transforment les défis en opportunités 
+                et propulsent nos clients vers le succès.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-24 sm:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div
+            className="mx-auto max-w-2xl text-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-6">
+              Rejoignez nos clients satisfaits
+            </h2>
+            <p className="text-lg text-gray-600 mb-10">
+              Faites confiance à notre expertise pour concrétiser vos ambitions digitales.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/contact"
+                className="bg-orange-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              >
+                Discutons de votre projet
+              </Link>
+              <Link
+                to="/projects"
+                className="bg-gray-900 text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-800 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              >
+                Découvrir nos projets
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  );
+}

@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Animations personnalisées pour le loader */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(249, 115, 22, 0.6);
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.loader-shimmer {
+  background: linear-gradient(
+    90deg,
+    #f3f4f6 0px,
+    #fbbf24 40px,
+    #f3f4f6 80px
+  );
+  background-size: 200px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.loader-pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+.loader-fade-in-up {
+  animation: fade-in-up 0.8s ease-out;
+}
+
+
+/* Animation de défilement pour les logos */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll-left {
+  animation: scroll-left 20s linear infinite;
+  will-change: transform;
+}
+
+.logos-container {
+  display: flex;
+  width: 200%;
+}
+
+body{
+  zoom: 95%;
+  background-color:  #f6eede;
+}
