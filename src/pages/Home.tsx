@@ -14,8 +14,10 @@ import {
   Calendar
 } from 'lucide-react';
 import FAQ from '../components/FAQ';
-
-
+import web from "/src/assets/video/siteweb.mp4"
+import app from "/src/assets/video/mobiles.mp4"
+import logiciel from "/src/assets/video/logicieldesktop.mp4"
+import ia from   "/src/assets/video/ia.mp4"
 const stats = [
   { number: '150+', label: 'Projets Réalisés' },
   { number: '50+', label: 'Clients Satisfaits' },
@@ -541,7 +543,7 @@ export default function Home() {
                     playsInline
                     controls={false}
                   >
-                    <source src="/src/assets/video/siteweb.mp4" type="video/mp4" />
+                    <source src={web} type="video/mp4" />
                     Votre navigateur ne supporte pas la lecture de vidéos.
                   </video>
                 </div>
@@ -630,7 +632,7 @@ export default function Home() {
                         playsInline
                         controls={false}
                       >
-                        <source src="/src/assets/video/mobiles.mp4" type="video/mp4" />
+                        <source src={app} type="video/mp4" />
                         Votre navigateur ne supporte pas la lecture de vidéos.
                       </video>
                     </div>
@@ -724,7 +726,7 @@ export default function Home() {
                     playsInline
                     controls={false}
                   >
-                    <source src="/src/assets/video/logicieldesktop.mp4" type="video/mp4" />
+                    <source src={logiciel} type="video/mp4" />
                     Votre navigateur ne supporte pas la lecture de vidéos.
                   </video>
                 </div>
@@ -800,7 +802,7 @@ export default function Home() {
                   playsInline
                   controls={false}
                 >
-                  <source src="/src/assets/video/ia.mp4" type="video/mp4" />
+                  <source src={ia} type="video/mp4" />
                   Votre navigateur ne supporte pas la lecture de vidéos.
                 </video>
               </div>

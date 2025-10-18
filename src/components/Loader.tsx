@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-
+import logo from "/src/assets/image/logo.png"
 interface LoaderProps {
   isLoading: boolean;
 }
@@ -17,7 +17,7 @@ export default function Loader({ isLoading }: LoaderProps) {
       <div className="flex flex-col items-center space-y-8">
         {/* Logo avec pulsation seulement */}
         <motion.img
-          src="/src/assets/image/logo.png"
+          src={logo}
           alt="Bigitalis Logo"
           className="w-20 h-20 object-contain"
           animate={{ 

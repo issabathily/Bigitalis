@@ -234,16 +234,7 @@ export default function Projects() {
 
                   <div className="mb-6">
                     <h4 className="font-semibold text-gray-900 mb-3">Technologies utilisées:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm font-medium"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+
                   </div>
 
                   <div className="mb-6">

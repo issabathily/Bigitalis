@@ -12,6 +12,12 @@ import {
   Zap,
   ArrowRight
 } from 'lucide-react';
+import equipe from "/src/assets/image/collage1.png"
+import issa from "/src/assets/image/issa.jpg"
+import moussa from "/src/assets/image/moussa.png"
+import sekou from "/src/assets/image/sekou.jpg"
+import aliou from "/src/assets/image/aliou.jpg"
+import fama from   "/src/assets/image/fama.jpg"
 
 const values = [
   {
@@ -39,27 +45,32 @@ const values = [
 const team = [
   {
     name: 'Issa Bathily ',
-    role: 'Developer et expert en Automatisation',
-    description: '10+ années d\'expérience en développement web et mobile.',
-    image: 'src/assets/image/issa.jpg',
+    role: ' expert en Automatisation',
+    description: '3 + années d\'expérience en développement web et mobile.',
+    image: issa,
   },
   {
     name: 'Moussa Corea',
     role: 'Data Scientist & Disiner',
     description: 'Experte en intelligence artificielle et analyse de données.',
-    image: 'src/assets/image/moussa.png',
+    image: moussa,
   },
   {
     name: 'Sekou Diedhou',
     role: 'Developer Odoo',
     description: 'Créateur d\'expériences utilisateur exceptionnelles.',
-    image: 'src/assets/image/sekou.jpg',
+    image: sekou,
   },
   {
-    name: 'Thomas Leroy',
-    role: 'UI/UX Designer',
-    description: 'Créateur d\'expériences utilisateur exceptionnelles.',
-    image: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=500',
+    name: 'Aliou Diallo',
+    role: 'Expert en Excel',
+    description: 'Création de visuel Avancer avec les donnes.',
+    image: aliou,
+  },{
+    name: 'Fama Diop',
+    role: 'Develloper Mobile et Community Manager',
+    description: 'Creation application Perfortmant ',
+    image: fama,
   },
 ];
 
@@ -136,7 +147,7 @@ export default function About() {
                 <div className="relative w-full h-full lg:w-[500px] lg:h-[550px] rounded-3xl overflow-hidden dark:bg-gray-800 p-2">
                   <div className="w-full h-full rounded-2xl overflow-hidden">
                     <img 
-                      src="/src/assets/image/collage1.png"
+                      src={equipe}
                       alt="Équipe Bigitalis" 
                       className="w-full h-full object-cover"
                     />
