@@ -362,15 +362,13 @@ export default function Home() {
                 </div>
               </div>
 
+
               {/* Deuxième set identique pour la boucle infinie */}
               <div className="flex space-x-12 flex-shrink-0 pr-24" style={{ width: '50%' }}>
                 {/* Google Suite */}
                 <div className="flex flex-col items-center group flex-shrink-0">
                   <div className="w-24 h-24 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <i className="fab fa-google text-5xl text-blue-500 group-hover:text-blue-600 transition-colors duration-300"></i>
                   </div>
-                  <h3 className="text-sm font-semibold text-gray-900 dark:text-white mt-3 text-center">Google Suite</h3>
-                  <p className="text-xs text-gray-600 dark:text-gray-400 text-center">Document</p>
                 </div>
 
                 {/* Salesforce */}
