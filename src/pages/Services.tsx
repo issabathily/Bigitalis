@@ -153,13 +153,13 @@ export default function Services() {
       </section>
 
       {/* Services Grid */}
-      <section className="py-24  dark:bg-dark-950">
+      <section className="py-24 bg-gray-100  dark:bg-dark-950">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
               <motion.div
                 key={service.title}
-                className="bg-[#fff7ed] dark:bg-dark-950 border-0 dark:border dark:border-orange-500/30 rounded-xl p-6 shadow-sm hover:shadow-xl transition-all duration-500 group text-center"
+                className="bg-white dark:bg-dark-950 border-0 dark:border dark:border-orange-500/30 rounded-xl p-6 shadow-sm hover:shadow-xl transition-all duration-500 group text-center"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -222,10 +222,10 @@ export default function Services() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { step: '01', title: 'Analyse', desc: 'Étude approfondie de vos besoins et objectifs', icon: '🔍' },
-              { step: '02', title: 'Conception', desc: 'Design et architecture de la solution', icon: '🎨' },
-              { step: '03', title: 'Développement', desc: 'Réalisation avec technologies avancées', icon: '⚙️' },
-              { step: '04', title: 'Livraison', desc: 'Déploiement et formation utilisateur', icon: '🚀' },
+              { step: '01', title: 'Analyse', desc: 'Étude approfondie de vos besoins et objectifs', icon: '' },
+              { step: '02', title: 'Conception', desc: 'Design et architecture de la solution', icon: '' },
+              { step: '03', title: 'Développement', desc: 'Réalisation avec technologies avancées', icon: '' },
+              { step: '04', title: 'Livraison', desc: 'Déploiement et formation utilisateur', icon: '' },
             ].map((item, index) => (
               <motion.div
                 key={item.step}
@@ -249,40 +249,40 @@ export default function Services() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 sm:py-32 bg-gray-900">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div
-            className="mx-auto max-w-2xl text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl mb-6">
-              Démarrons votre projet ensemble
-            </h2>
-            <p className="text-lg text-gray-300 mb-10">
-              Contactez-nous dès aujourd'hui pour un audit gratuit de vos besoins digitaux 
-              et recevez votre devis personnalisé sous 24h.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/contact"
-                className="bg-orange-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-              >
-                Obtenir un devis gratuit
-              </Link>
-              <Link
-                to="/projects"
-                className="border border-gray-300 dark:border-white text-gray-900 dark:text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 dark:hover:bg-white hover:text-gray-900 dark:hover:text-gray-900 transition-all duration-300 transform hover:scale-105"
-              >
-                Voir nos réalisations
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/*<section className="py-24 sm:py-32 bg-gray-900">*/}
+      {/*  <div className="mx-auto max-w-7xl px-6 lg:px-8">*/}
+      {/*    <motion.div*/}
+      {/*      className="mx-auto max-w-2xl text-center"*/}
+      {/*      initial={{ opacity: 0, y: 30 }}*/}
+      {/*      whileInView={{ opacity: 1, y: 0 }}*/}
+      {/*      transition={{ duration: 0.8 }}*/}
+      {/*      viewport={{ once: true }}*/}
+      {/*    >*/}
+      {/*      <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl mb-6">*/}
+      {/*        Démarrons votre projet ensemble*/}
+      {/*      </h2>*/}
+      {/*      <p className="text-lg text-gray-300 mb-10">*/}
+      {/*        Contactez-nous dès aujourd'hui pour un audit gratuit de vos besoins digitaux */}
+      {/*        et recevez votre devis personnalisé sous 24h.*/}
+      {/*      </p>*/}
+      {/*      */}
+      {/*      <div className="flex flex-col sm:flex-row gap-4 justify-center">*/}
+      {/*        <Link*/}
+      {/*          to="/contact"*/}
+      {/*          className="bg-orange-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"*/}
+      {/*        >*/}
+      {/*          Obtenir un devis gratuit*/}
+      {/*        </Link>*/}
+      {/*        <Link*/}
+      {/*          to="/projects"*/}
+      {/*          className="border border-gray-300 dark:border-white text-gray-900 dark:text-white px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 dark:hover:bg-white hover:text-gray-900 dark:hover:text-gray-900 transition-all duration-300 transform hover:scale-105"*/}
+      {/*        >*/}
+      {/*          Voir nos réalisations*/}
+      {/*        </Link>*/}
+      {/*      </div>*/}
+      {/*    </motion.div>*/}
+      {/*  </div>*/}
+      {/*</section>*/}
     </div>
   );
 }

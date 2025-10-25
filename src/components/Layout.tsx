@@ -24,7 +24,7 @@ export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
 
   return (
-    <div className="bg-white dark:bg-dark-900 min-h-screen transition-colors duration-300">
+    <div className="bg-white dark:bg-dark-950 min-h-screen transition-colors duration-300">
       <NavigationProgress />
       <header className="absolute inset-x-0 top-0 z-50">
         <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
@@ -88,12 +88,16 @@ export default function Layout({ children }: LayoutProps) {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <ThemeToggle />
-            <Link
-              to="/contact"
-              className="bg-orange-500 text-white px-4 py-2 rounded-full font-semibold hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
-            >
-              contacter →
-            </Link>
+            <a
+  href="https://wa.me/221785309683"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex items-center space-x-2 bg-orange-500 hover:accent-green-600 text-white hover:text-black px-4 py-2 rounded-full font-semibold hover:bg-[#25d366] transition-all duration-300 transform hover:scale-105"
+>
+                <i className="fab fa-whatsapp text-xl"></i>
+  <span>Contacter →</span>
+</a>
+
           </motion.div>
         </nav>
         
@@ -105,7 +109,7 @@ export default function Layout({ children }: LayoutProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           />
-          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white/95 dark:bg-dark-900/95 backdrop-blur-xl border-l border-gray-200/20 dark:border-gray-700/20 sm:max-w-sm shadow-2xl">
+          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white/95 dark:bg-dark-950 backdrop-blur-xl border-l border-gray-200/20 dark:border-gray-700/20 sm:max-w-sm shadow-2xl">
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
@@ -137,7 +141,7 @@ export default function Layout({ children }: LayoutProps) {
                 <motion.button
                   type="button"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="relative p-2 rounded-xl bg-gray-100/50 dark:bg-gray-800/50 text-gray-600 dark:text-gray-400 hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-all duration-300 group"
+                  className="relative p-2 rounded-xl bg-gray-100/50 dark:bg-dark-950 text-gray-600 dark:text-gray-400 hover:text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-all duration-300 group"
                   initial={{ opacity: 0, rotate: -90 }}
                   animate={{ opacity: 1, rotate: 0 }}
                   transition={{ delay: 0.3 }}
@@ -150,7 +154,7 @@ export default function Layout({ children }: LayoutProps) {
               </div>
 
               {/* Navigation */}
-              <div className="px-6 py-8">
+              <div className="px-2 py-8">
                 <nav className="space-y-2">
                   {navigation.map((item, index) => (
                     <motion.div
@@ -171,7 +175,7 @@ export default function Layout({ children }: LayoutProps) {
                         <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
                           location.pathname === item.href 
                             ? 'bg-orange-500 shadow-lg shadow-orange-500/50' 
-                            : 'bg-gray-300 dark:bg-gray-600 group-hover:bg-orange-400'
+                            : 'bg-gray-300 dark:bg-dark-950 group-hover:bg-orange-400'
                         }`} />
                         <span className="flex-1">{item.name}</span>
                         <div className={`w-6 h-6 rounded-full border-2 transition-all duration-300 ${
@@ -205,7 +209,7 @@ export default function Layout({ children }: LayoutProps) {
                   transition={{ delay: 0.4 }}
                 >
                   <div className="flex justify-center">
-                    <div className="p-2 rounded-xl bg-gray-100/50 dark:bg-gray-800/50">
+                    <div className="p-2 rounded-xl bg-gray-100/50 dark:bg-dark-950">
                       <ThemeToggle />
                     </div>
                   </div>
@@ -282,9 +286,9 @@ export default function Layout({ children }: LayoutProps) {
             <div>
               <h3 className="text-lg font-semibold mb-4 text-white">Contact</h3>
               <div className="space-y-2 text-gray-400 dark:text-gray-300">
-                <p>contact@bigitalis.com</p>
-                <p>+33 1 23 45 67 89</p>
-                <p>Paris, France</p>
+                <p>bigitalis05@gmail.com</p>
+                <p>+221 77 388 04 36</p>
+                <p>Dakar, Senegal</p>
               </div>
             </div>
           </div>

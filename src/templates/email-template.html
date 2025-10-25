@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Nouveau message de contact</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+    
+    <!-- Header -->
+    <div style="background: linear-gradient(135deg, #f97316, #ea580c); color: white; padding: 20px; border-radius: 8px 8px 0 0; text-align: center;">
+        <h1 style="margin: 0; font-size: 24px;">📧 Nouveau message de contact</h1>
+        <p style="margin: 5px 0 0 0; opacity: 0.9;">Site Bigitalis</p>
+    </div>
+    
+    <!-- Content -->
+    <div style="background: #f8f9fa; padding: 20px; border-radius: 0 0 8px 8px; border: 1px solid #e5e7eb;">
+        
+        <!-- Client Info -->
+        <div style="background: white; padding: 15px; border-radius: 6px; margin-bottom: 20px; border-left: 4px solid #f97316;">
+            <h2 style="color: #f97316; margin-top: 0; font-size: 18px;">👤 Informations du client</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 8px 0; font-weight: bold; width: 120px;">Nom :</td>
+                    <td style="padding: 8px 0;">{{from_name}}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; font-weight: bold;">Email :</td>
+                    <td style="padding: 8px 0;"><a href="mailto:{{from_email}}" style="color: #f97316; text-decoration: none;">{{from_email}}</a></td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; font-weight: bold;">Entreprise :</td>
+                    <td style="padding: 8px 0;">{{company}}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; font-weight: bold;">Téléphone :</td>
+                    <td style="padding: 8px 0;"><a href="tel:{{phone}}" style="color: #f97316; text-decoration: none;">{{phone}}</a></td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Project Details -->
+        <div style="background: white; padding: 15px; border-radius: 6px; margin-bottom: 20px; border-left: 4px solid #10b981;">
+            <h2 style="color: #10b981; margin-top: 0; font-size: 18px;">📋 Détails du projet</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                    <td style="padding: 8px 0; font-weight: bold; width: 120px;">Service :</td>
+                    <td style="padding: 8px 0;">{{subject}}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; font-weight: bold;">Budget :</td>
+                    <td style="padding: 8px 0;">{{budget}}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 8px 0; font-weight: bold;">Délai :</td>
+                    <td style="padding: 8px 0;">{{timeline}}</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Message -->
+        <div style="background: white; padding: 15px; border-radius: 6px; border-left: 4px solid #3b82f6;">
+            <h2 style="color: #3b82f6; margin-top: 0; font-size: 18px;">💬 Message du client</h2>
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 4px; font-style: italic; white-space: pre-wrap;">{{message}}</div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="mailto:{{from_email}}?subject=Re: Votre demande de contact - Bigitalis" 
+               style="background: #f97316; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; margin: 5px; font-weight: bold;">
+                📧 Répondre au client
+            </a>
+            <a href="tel:{{phone}}" 
+               style="background: #10b981; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; margin: 5px; font-weight: bold;">
+                📞 Appeler le client
+            </a>
+        </div>
+        
+    </div>
+    
+    <!-- Footer -->
+    <div style="text-align: center; margin-top: 20px; color: #6b7280; font-size: 12px;">
+        <p>📧 Message envoyé depuis le site <strong>Bigitalis</strong></p>
+        <p>🕒 Reçu le {{current_date}}</p>
+    </div>
+    
+</body>
+</html>
+

@@ -18,11 +18,12 @@ import web from "/src/assets/video/siteweb.mp4"
 import app from "/src/assets/video/mobiles.mp4"
 import logiciel from "/src/assets/video/logicieldesktop.mp4"
 import ia from   "/src/assets/video/ia.mp4"
+import React from "react";
 const stats = [
-  { number: '150+', label: 'Projets Réalisés' },
-  { number: '50+', label: 'Clients Satisfaits' },
-  { number: '5+', label: 'Années d\'Expérience' },
-  { number: '24/7', label: 'Support Technique' },
+  // { number: '150+', label: 'Projets Réalisés' },
+  // { number: '50+', label: 'Clients Satisfaits' },
+  // { number: '5+', label: 'Années d\'Expérience' },
+  // { number: '24/7', label: 'Support Technique' },
 ];
 
 const features = [
@@ -36,10 +37,10 @@ export default function Home() {
   return (
     <div className="bg-gray-100 dark:bg-dark-950 transition-colors duration-300">
       {/* Hero Section */}
-      <div className="relative isolate px-6 pt-14 lg:px-8">
+      <div className="relative isolate ">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+          className="absolute inset-x-0 -top-30 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         >
           <div
             style={{
@@ -50,7 +51,7 @@ export default function Home() {
           />
         </div>
         
-        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+        <div className="mx-auto max-w-2xl py-32 sm:py-28 lg:py-44">
           <motion.div 
             className="hidden sm:mb-8 sm:flex sm:justify-center"
             initial={{ opacity: 0, y: 20 }}
@@ -73,12 +74,36 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              Solutions Digitales
-              <span className="text-orange-500 block">Innovantes</span>
+              <motion.span
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="inline-block"
+              >
+                Solutions Digitales
+              </motion.span>
+              <motion.span 
+                className="text-orange-500 block"
+                initial={{ opacity: 0, x: 50, scale: 0.8 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: 0.8,
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 10
+                }}
+                whileHover={{ 
+                  scale: 1.05,
+                  transition: { duration: 0.2 }
+                }}
+              >
+                Innovantes
+              </motion.span>
             </motion.h1>
             
             <motion.p 
-              className="mt-8 text-lg font-medium text-pretty text-gray-600 dark:text-gray-300 sm:text-xl/8"
+              className="mt-8 text-lg font-medium text-pretty text-gray-600 dark:text-white sm:text-xl/8"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
@@ -93,15 +118,18 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <Link
-                to="/contact"
-                className="rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-white shadow-lg hover:bg-orange-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
-              >
-                Demander un devis
-              </Link>
+                       <a
+  href="https://wa.me/221785309683"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex items-center space-x-2 bg-orange-500 hover:accent-green-600 text-white hover:text-black px-6 py-3 rounded-full font-semibold hover:bg-[#25d366] transition-all duration-300 transform hover:scale-105"
+>
+
+  <span>Demander un devis </span>
+</a>
               <Link 
                 to="/services" 
-                className="text-sm font-semibold text-gray-900 hover:text-orange-500 transition-colors group"
+                className="text-sm font-semibold dark:text-orange-500 transition-colors group"
               >
                 Découvrir nos services 
                 <ArrowRight className="inline w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -181,7 +209,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {/* Email Management Card */}
+                {/* Chatbot WhatsApp Card */}
                 <motion.div
                   className="bg-white dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 rounded-xl p-6 hover:bg-gray-50 dark:hover:bg-gray-800/70 transition-all duration-300 shadow-sm dark:shadow-none"
                   whileHover={{ y: -5 }}
@@ -190,16 +218,16 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                   viewport={{ once: true }}
                 >
-                  <div className="flex items-center justify-center w-12 h-12 bg-orange-500/20 rounded-lg mb-4">
-                    <i className="fas fa-envelope text-orange-500"></i>
+                  <div className="flex items-center justify-center w-12 h-12 bg-green-500/20 rounded-lg mb-4">
+                    <i className="fab fa-whatsapp text-green-500 text-xl"></i>
                   </div>
-                  <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">Gestion des Emails</h3>
+                  <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">Chatbot WhatsApp</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                    Tri intelligent et réponses automatiques. Reprenez le contrôle de votre boîte mail et gagnez des heures chaque semaine.
+                    Répondez automatiquement à vos clients 24/7 sur WhatsApp. Gagnez du temps et améliorez votre service client.
                   </p>
                 </motion.div>
 
-                {/* Lead Generation Card */}
+                {/* Email Automation Card */}
                 <motion.div
                   className="bg-white dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 rounded-xl p-6 hover:bg-gray-50 dark:hover:bg-gray-800/70 transition-all duration-300 shadow-sm dark:shadow-none"
                   whileHover={{ y: -5 }}
@@ -208,16 +236,16 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.3 }}
                   viewport={{ once: true }}
                 >
-                  <div className="flex items-center justify-center w-12 h-12 bg-orange-500/20 rounded-lg mb-4">
-                    <UserPlus className="w-6 h-6 text-orange-500" />
+                  <div className="flex items-center justify-center w-12 h-12 bg-blue-500/20 rounded-lg mb-4">
+                    <i className="fas fa-envelope text-blue-500"></i>
                   </div>
-                  <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">Génération de Leads</h3>
+                  <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">Automatisation Email</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                    Automatisez vos campagnes et identifiez vos prospects les plus qualifiés.
+                    Envoyez des emails automatiques à vos clients. Séries de bienvenue, relances, confirmations.
                   </p>
                 </motion.div>
 
-                {/* CRM & Sales Card */}
+                {/* Social Media Automation Card */}
                 <motion.div
                   className="bg-white dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 rounded-xl p-6 hover:bg-gray-50 dark:hover:bg-gray-800/70 transition-all duration-300 shadow-sm dark:shadow-none"
                   whileHover={{ y: -5 }}
@@ -226,16 +254,16 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.4 }}
                   viewport={{ once: true }}
                 >
-                  <div className="flex items-center justify-center w-12 h-12 bg-orange-500/20 rounded-lg mb-4">
-                    <BarChart3 className="w-6 h-6 text-orange-500" />
+                  <div className="flex items-center justify-center w-12 h-12 bg-purple-500/20 rounded-lg mb-4">
+                    <i className="fas fa-share-alt text-purple-500"></i>
                   </div>
-                  <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">CRM & Sales</h3>
+                  <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">Publication Automatique</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                    Optimisez la gestion de vos contacts et prospects et gagnez des heures chaque semaine.
+                    Publiez automatiquement sur vos réseaux sociaux. Facebook, Instagram, LinkedIn programmés.
                   </p>
                 </motion.div>
 
-                {/* Calendar Management Card */}
+                {/* Customer Support Automation Card */}
                 <motion.div
                   className="bg-white dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700/50 rounded-xl p-6 hover:bg-gray-50 dark:hover:bg-gray-800/70 transition-all duration-300 shadow-sm dark:shadow-none"
                   whileHover={{ y: -5 }}
@@ -244,12 +272,12 @@ export default function Home() {
                   transition={{ duration: 0.6, delay: 0.5 }}
                   viewport={{ once: true }}
                 >
-                  <div className="flex items-center justify-center w-12 h-12 bg-orange-500/20 rounded-lg mb-4">
-                    <Calendar className="w-6 h-6 text-orange-500" />
+                  <div className="flex items-center justify-center w-12 h-12 bg-indigo-500/20 rounded-lg mb-4">
+                    <i className="fas fa-headset text-indigo-500"></i>
                   </div>
-                  <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">Gestion Agenda</h3>
+                  <h3 className="text-base font-semibold text-gray-900 dark:text-white mb-2">Support Client Auto</h3>
                   <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                    Planification automatique de vos rendez-vous et gagnez des heures chaque semaine..
+                    Réponses automatiques aux questions fréquentes. Chatbot intelligent pour votre site web.
                   </p>
                 </motion.div>
               </div>
@@ -524,7 +552,7 @@ export default function Home() {
                       <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
                       <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                     </div>
-                    <div className="flex items-center space-x-2 ml-4 text-sm text-gray-600">
+                    <div className="flex items-center space-x-2 ml-4 text-sm text-gray-600 dark:text-gray-300">
                       <Globe className="w-4 h-4" />
                       <span>monsite.com</span>
                     </div>
@@ -566,7 +594,7 @@ export default function Home() {
               <h3 className="text-3xl lg:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
                 <span className="text-gray-900 dark:text-white">Applications</span> <span className="text-orange-500">Mobiles</span>
               </h3>
-              <p className="text-lg leading-relaxed text-gray-600 mb-6">
+              <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6">
                 Applications iOS et Android natives ou hybrides pour toucher vos clients partout. 
                 Développement d'apps performantes avec une expérience utilisateur optimale.
               </p>
@@ -574,19 +602,19 @@ export default function Home() {
               <div className="space-y-4 mb-8">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                  <span className="text-gray-700">Développement natif iOS et Android</span>
+                  <span className="text-gray-700 dark:text-gray-300">Développement natif iOS et Android</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                  <span className="text-gray-700">Applications hybrides React Native</span>
+                  <span className="text-gray-700 dark:text-gray-300">Applications hybrides React Native</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                  <span className="text-gray-700">Interface utilisateur intuitive</span>
+                  <span className="text-gray-700 dark:text-gray-300">Interface utilisateur intuitive</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                  <span className="text-gray-700">Publication sur App Store et Google Play</span>
+                  <span className="text-gray-700 dark:text-gray-300">Publication sur App Store et Google Play</span>
                 </div>
               </div>
               
@@ -657,7 +685,7 @@ export default function Home() {
               <h3 className="text-3xl lg:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
                 <span className="text-gray-900 dark:text-white">Logiciels</span> <span className="text-orange-500">Sur Mesure</span>
               </h3>
-              <p className="text-lg leading-relaxed text-gray-600 mb-6">
+              <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6">
                 Solutions logicielles personnalisées adaptées à vos besoins spécifiques. 
                 Développement d'applications métier pour optimiser vos processus internes.
               </p>
@@ -665,19 +693,19 @@ export default function Home() {
               <div className="space-y-4 mb-8">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                  <span className="text-gray-700">Analyse des besoins métier</span>
+                  <span className="text-gray-700 dark:text-gray-300">Analyse des besoins métier</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                  <span className="text-gray-700">Architecture technique sur mesure</span>
+                  <span className="text-gray-700 dark:text-gray-300">Architecture technique sur mesure</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                  <span className="text-gray-700">Développement agile et itératif</span>
+                  <span className="text-gray-700 dark:text-gray-300">Développement agile et itératif</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                  <span className="text-gray-700">Formation et support technique</span>
+                  <span className="text-gray-700 dark:text-gray-300">Formation et support technique</span>
                 </div>
               </div>
               
@@ -707,7 +735,7 @@ export default function Home() {
                       <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
                       <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                     </div>
-                    <div className="flex items-center space-x-2 ml-4 text-sm text-gray-600">
+                    <div className="flex items-center space-x-2 ml-4 text-sm text-gray-600 dark:text-gray-300">
                       <Code2 className="w-4 h-4" />
                       <span>dashboard.bigitalis.com</span>
                     </div>
@@ -749,7 +777,7 @@ export default function Home() {
               <h3 className="text-3xl lg:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
                 <span className="text-gray-900 dark:text-white">Intelligence</span> <span className="text-orange-500">Artificielle</span>
               </h3>
-              <p className="text-lg leading-relaxed text-gray-600 mb-6">
+              <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6">
                 Intégration IA et machine learning pour automatiser et optimiser vos processus. 
                 Solutions intelligentes qui transforment vos données en insights actionnables.
               </p>
@@ -757,19 +785,19 @@ export default function Home() {
               <div className="space-y-4 mb-8">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                  <span className="text-gray-700">Chatbots et assistants virtuels</span>
+                  <span className="text-gray-700 dark:text-gray-300">Chatbots et assistants virtuels</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                  <span className="text-gray-700">Analyse prédictive et data mining</span>
+                  <span className="text-gray-700 dark:text-gray-300">Analyse prédictive et data mining</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                  <span className="text-gray-700">Automatisation des processus</span>
+                  <span className="text-gray-700 dark:text-gray-300">Automatisation des processus</span>
                 </div>
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                  <span className="text-gray-700">Recommandations personnalisées</span>
+                  <span className="text-gray-700 dark:text-gray-300">Recommandations personnalisées</span>
                 </div>
               </div>
               
@@ -811,39 +839,7 @@ export default function Home() {
 
 
       {/* Stats Section */}
-      <section className="py-24 sm:py-32 bg-white dark:bg-dark-950">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div 
-            className="mx-auto max-w-2xl text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Notre <span className="text-orange-500">Impact</span>
-            </h2>
-          </motion.div>
-          
-          <div className="grid grid-cols-2 gap-8 lg:grid-cols-4">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                className="text-center"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="text-4xl lg:text-5xl font-bold text-orange-500 mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+    
 
       {/* Features Section */}
       <section className="py-24 sm:py-32 bg-gray-50 dark:bg-dark-950">
@@ -858,7 +854,7 @@ export default function Home() {
               <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-6">
                 Pourquoi choisir <span className="text-orange-500">Bigitalis</span> ?
               </h2>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
                 Notre approche combine expertise technique, innovation et accompagnement personnalisé 
                 pour garantir le succès de vos projets digitaux.
               </p>
@@ -874,7 +870,7 @@ export default function Home() {
                     viewport={{ once: true }}
                   >
                     <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
-                    <span className="text-gray-700 font-medium">{feature}</span>
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">{feature}</span>
                   </motion.div>
                 ))}
               </div>
@@ -906,7 +902,7 @@ export default function Home() {
                     <item.icon className="w-6 h-6 text-orange-500 group-hover:text-white transition-colors duration-300" />
                   </div>
                   <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
-                  <p className="text-sm text-gray-600">{item.desc}</p>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">{item.desc}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -930,7 +926,7 @@ export default function Home() {
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-6">
               Prêt à transformer votre <span className="text-orange-500">vision</span> en réalité ?
             </h2>
-            <p className="text-lg text-gray-600 mb-10">
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-10">
               Contactez nos experts dès aujourd'hui pour discuter de votre projet 
               et recevoir un devis personnalisé gratuit.
             </p>

@@ -10,6 +10,8 @@ import {
   MessageSquare,
   Calendar
 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
+import { EMAILJS_CONFIG } from '../config/emailjs';
 
 interface FormData {
   name: string;
@@ -26,20 +28,20 @@ const contactInfo = [
   {
     icon: Mail,
     title: 'Email',
-    detail: 'issabathily388@gmail.com',
+    detail: 'bigitalis05@gmail.com',
     description: 'Réponse sous 24h garantie',
   },
   {
     icon: Phone,
     title: 'Téléphone',
-    detail: '+33 1 23 45 67 89',
+    detail: '+221 77 388 04 36',
     description: 'Lun-Ven, 9h-18h',
   },
   {
     icon: MapPin,
     title: 'Adresse',
-    detail: '123 Avenue de la République',
-    description: '75011 Paris, France',
+    detail: '',
+    description: 'Dakar',
   },
   {
     icon: Clock,
@@ -71,12 +73,62 @@ export default function Contact() {
     timeline: '',
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 5000);
+    setIsLoading(true);
+    setError('');
+
+    try {
+      // Paramètres pour l'email
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        company: formData.company,
+        phone: formData.phone,
+        subject: formData.subject,
+        budget: formData.budget,
+        timeline: formData.timeline,
+        message: formData.message,
+        to_email: EMAILJS_CONFIG.TO_EMAIL,
+        // Ajout de l'email du client pour faciliter la réponse
+        client_email: formData.email,
+        client_name: formData.name,
+        // Ajout de l'email du client dans le sujet pour le rendre visible
+        reply_to: formData.email
+      };
+
+      // Envoi de l'email
+      await emailjs.send(
+        EMAILJS_CONFIG.SERVICE_ID, 
+        EMAILJS_CONFIG.TEMPLATE_ID, 
+        templateParams, 
+        EMAILJS_CONFIG.PUBLIC_KEY
+      );
+      
+      setIsSubmitted(true);
+      setTimeout(() => setIsSubmitted(false), 5000);
+      
+      // Reset du formulaire
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        phone: '',
+        subject: '',
+        message: '',
+        budget: '',
+        timeline: '',
+      });
+      
+    } catch (error) {
+      console.error('Erreur lors de l\'envoi:', error);
+      setError('Erreur lors de l\'envoi du message. Veuillez réessayer.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -186,18 +238,29 @@ export default function Contact() {
                     transition={{ duration: 0.5 }}
                   >
                     <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                       Message envoyé avec succès !
                     </h3>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 dark:text-gray-300">
                       Nous vous répondrons sous 24h. Merci pour votre confiance !
                     </p>
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Affichage des erreurs */}
+                    {error && (
+                      <motion.div
+                        className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>
+                      </motion.div>
+                    )}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Nom complet *
                         </label>
                         <input
@@ -206,13 +269,13 @@ export default function Contact() {
                           required
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-colors"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-500/20 transition-colors"
                           placeholder="Votre nom"
                         />
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Email *
                         </label>
                         <input
@@ -221,7 +284,7 @@ export default function Contact() {
                           required
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-colors"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-500/20 transition-colors"
                           placeholder="votre@email.com"
                         />
                       </div>
@@ -229,7 +292,7 @@ export default function Contact() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Entreprise
                         </label>
                         <input
@@ -237,13 +300,13 @@ export default function Contact() {
                           name="company"
                           value={formData.company}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-colors"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-500/20 transition-colors"
                           placeholder="Nom de votre entreprise"
                         />
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Téléphone
                         </label>
                         <input
@@ -251,14 +314,14 @@ export default function Contact() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-colors"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-500/20 transition-colors"
                           placeholder="+33 1 23 45 67 89"
                         />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Type de service *
                       </label>
                       <select
@@ -266,7 +329,7 @@ export default function Contact() {
                         required
                         value={formData.subject}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-colors"
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-500/20 transition-colors"
                       >
                         <option value="">Sélectionnez un service</option>
                         {services.map((service) => (
@@ -279,14 +342,14 @@ export default function Contact() {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Budget estimé
                         </label>
                         <select
                           name="budget"
                           value={formData.budget}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-colors"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-500/20 transition-colors"
                         >
                           <option value="">Sélectionnez un budget</option>
                           <option value="< 5K€">Moins de 5 000€</option>
@@ -297,14 +360,14 @@ export default function Contact() {
                       </div>
                       
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                           Délai souhaité
                         </label>
                         <select
                           name="timeline"
                           value={formData.timeline}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-colors"
+                          className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-500/20 transition-colors"
                         >
                           <option value="">Sélectionnez un délai</option>
                           <option value="Urgent (< 1 mois)">Urgent (moins d'1 mois)</option>
@@ -316,7 +379,7 @@ export default function Contact() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                         Décrivez votre projet *
                       </label>
                       <textarea
@@ -325,19 +388,33 @@ export default function Contact() {
                         rows={6}
                         value={formData.message}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 transition-colors resize-none"
+                        className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-orange-500 focus:ring-2 focus:ring-orange-200 dark:focus:ring-orange-500/20 transition-colors resize-none"
                         placeholder="Décrivez votre projet, vos objectifs et vos besoins spécifiques..."
                       />
                     </div>
 
                     <motion.button
                       type="submit"
-                      className="w-full bg-orange-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2"
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      disabled={isLoading}
+                      className={`w-full px-8 py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center space-x-2 ${
+                        isLoading 
+                          ? 'bg-gray-400 cursor-not-allowed' 
+                          : 'bg-orange-500 hover:bg-orange-600'
+                      }`}
+                      whileHover={!isLoading ? { scale: 1.02 } : {}}
+                      whileTap={!isLoading ? { scale: 0.98 } : {}}
                     >
-                      <Send className="w-5 h-5" />
-                      <span>Envoyer ma demande</span>
+                      {isLoading ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                          <span>Envoi en cours...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5" />
+                          <span>Envoyer ma demande</span>
+                        </>
+                      )}
                     </motion.button>
                   </form>
                 )}
@@ -348,122 +425,10 @@ export default function Contact() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div 
-            className="mx-auto max-w-2xl text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Questions <span className="text-orange-500">Fréquentes</span>
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
-              Trouvez rapidement les réponses à vos questions les plus courantes.
-            </p>
-          </motion.div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {[
-              {
-                question: "Quel est le délai moyen pour un projet ?",
-                answer: "Les délais varient selon la complexité : 2-4 semaines pour un site vitrine, 2-6 mois pour une application mobile, et 3-12 mois pour des logiciels sur mesure."
-              },
-              {
-                question: "Proposez-vous de la maintenance ?",
-                answer: "Oui, nous proposons des contrats de maintenance incluant mises à jour, sauvegardes, monitoring et support technique 24/7."
-              },
-              {
-                question: "Travaillez-vous avec des TPE/PME ?",
-                answer: "Absolument ! Nous adaptons nos solutions et nos tarifs à tous types d'entreprises, des startups aux grandes corporations."
-              },
-              {
-                question: "Comment se déroule le processus ?",
-                answer: "Analyse des besoins → Devis détaillé → Conception → Développement → Tests → Livraison → Formation et support."
-              },
-              {
-                question: "Gérez-vous l'hébergement ?",
-                answer: "Nous proposons des solutions d'hébergement cloud sécurisées et performantes, ou nous adaptons à votre infrastructure existante."
-              },
-              {
-                question: "Quelles technologies utilisez-vous ?",
-                answer: "Nous utilisons les technologies les plus récentes et adaptées : React, Next.js, Node.js, Python, AWS, et bien d'autres selon vos besoins."
-              },
-            ].map((faq, index) => (
-              <motion.div
-                key={index}
-                className="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ y: -2 }}
-              >
-                <h3 className="font-semibold text-gray-900 mb-3">{faq.question}</h3>
-                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+
 
       {/* Map Section */}
-      <section className="py-24 bg-gray-900">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                Rencontrons-nous
-              </h2>
-              <p className="text-gray-300 text-lg mb-8">
-                Notre bureau est situé au cœur de Paris, dans un espace moderne 
-                conçu pour favoriser la créativité et l'innovation.
-              </p>
-              
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <MapPin className="w-5 h-5 text-orange-500" />
-                  <span className="text-gray-900 dark:text-white">123 Avenue de la République, 75011 Paris</span>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <Calendar className="w-5 h-5 text-orange-500" />
-                  <span className="text-gray-900 dark:text-white">Rendez-vous sur demande</span>
-                </div>
-              </div>
-            </motion.div>
-            
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
-                <div className="bg-gradient-to-br from-orange-500/20 to-orange-600/20 rounded-lg p-8 text-center">
-                  <MapPin className="w-16 h-16 text-orange-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                    Bureau Parisien
-                  </h3>
-                  <p className="text-gray-300">
-                    Métro République (Lignes 3, 5, 8, 9, 11)
-                  </p>
-                  <p className="text-gray-300">
-                    Parking et accès PMR disponibles
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+
 
       {/* Final CTA */}
       <section className="py-24 sm:py-32 bg-orange-50">
