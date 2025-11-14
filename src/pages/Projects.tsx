@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { 
@@ -22,6 +22,11 @@ import n8n from "/src/assets/image/n8n.png";
 import figma from "/src/assets/image/figma.png";
 import sama from "/src/assets/image/sama.png";
 import stok from "/src/assets/image/stok.png";
+import bi from "/src/assets/image/sante.jpg";
+import chat from "/src/assets/image/chatbot.png";
+import web from "/src/assets/image/web.webp";
+// import accident from "/src/assets/image/accident.jpg";
+import vente from "/src/assets/image/vente.jpg";
 
 const projects = [
   {
@@ -43,8 +48,7 @@ const projects = [
     icon: Smartphone,
     gallery: [
       n8n,
-      'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=800'
+
     ]
   },
   {
@@ -65,9 +69,7 @@ const projects = [
     client: 'Magasin Informatique TechStore',
     icon: Smartphone,
     gallery: [
-      'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800'
+     stok
     ]
   },
   {
@@ -88,7 +90,7 @@ const projects = [
     client: 'Startup TechCorp',
     icon: Globe,
     gallery: [
-      figma,
+
     sama,
     ]
   },
@@ -97,7 +99,7 @@ const projects = [
     title: 'IA Prédictive DataFlow Analytics',
     category: 'Intelligence Artificielle',
     description: "Système d'analyse prédictive pour optimiser les ventes et stocks.",
-    image: 'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: chat,
     details: "DataFlow Analytics utilise des algorithmes d'intelligence artificielle pour analyser les données historiques et prévoir les ventes et besoins en stock. Cela permet aux entreprises de prendre des décisions éclairées et d'optimiser leurs ressources.",
     technologies: ['Python', 'TensorFlow', 'Pandas', 'AWS'],
     results: [
@@ -107,12 +109,10 @@ const projects = [
       'ROI de 300%'
     ],
     timeline: '4 mois',
-    client: 'DataFlow Corp',
+    client: '',
     icon: Brain,
     gallery: [
-      'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800'
+      chat
     ]
   },
   {
@@ -120,8 +120,20 @@ const projects = [
     title: 'Dashboard Analytics RetailVision',
     category: 'Analyse de Données',
     description: "Tableau de bord temps réel pour pilotage d'activité retail multi-sites.",
-    image: 'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=800',
-    details: "RetailVision fournit un tableau de bord en temps réel pour suivre les performances de plusieurs magasins. Les KPIs clés sont présentés de manière visuelle et interactive, facilitant la prise de décision stratégique.",
+    image: bi,
+    details: "Tableau de bord des Urgences Hospitalières – Avril 2023\n" +
+        "Voici les chiffres clés du mois :\n" +
+        "- Nombre total de patients : 479\n" +
+        "- Temps d’attente moyen : 34,9 minutes\n" +
+        "- Score de satisfaction : 5,30\n" +
+        "- Patients référés vers d'autres services : 216\n" +
+        "Répartition des patients :\n" +
+        "- Par statut d’admission : admis, transférés, sortis\n" +
+        "- Par tranche d’âge : toutes les générations concernées\n" +
+        "- Par sexe : légère majorité féminine\n" +
+        "- Par service de référence : diversité des orientations médicales\n" +
+        "- Par jour et par heure : pics d’affluence bien identifiés\n" +
+        "Ces données permettent d’améliorer la gestion des urgences, optimiser les ressources et renforcer la qualité des soins.",
     technologies: ['Vue.js', 'D3.js', 'Python', 'Elasticsearch'],
     results: [
       'Vision 360° activité',
@@ -133,18 +145,18 @@ const projects = [
     client: 'RetailVision Group',
     icon: Database,
     gallery: [
-      'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800'
+      // accident,
+        bi,
+        vente
     ]
   },
   {
     id: 6,
-    title: 'Plateforme SaaS CloudManager',
-    category: 'SaaS & Cloud',
-    description: 'Plateforme de gestion cloud multi-tenant avec API complète.',
-    image: 'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800',
-    details: "CloudManager est une plateforme SaaS complète permettant la gestion multi-tenant d'applications cloud. Elle inclut une API RESTful, un système d'authentification robuste et des outils de monitoring en temps réel.",
+    title: 'site web de gestion Clibique',
+    category: '',
+    description: 'Plateforme de gestion clinique complète.',
+    image: web,
+    details: "",
     technologies: ['Next.js', 'Prisma', 'PostgreSQL', 'AWS'],
     results: [
       '1000+ utilisateurs actifs',
@@ -153,12 +165,10 @@ const projects = [
       'API complète'
     ],
     timeline: '10 mois',
-    client: 'CloudManager Ltd',
+    client: 'pharma',
     icon: Globe,
     gallery: [
-      'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=800',
-      'https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=800'
+  web
     ]
   }
 ];
@@ -217,6 +227,31 @@ export default function Projects() {
     setSelectedProject(project);
     setCurrentImageIndex(0);
   };
+
+  // Désactiver le scroll de la page quand la modale est ouverte
+  useEffect(() => {
+    if (selectedProject) {
+      // Sauvegarder la position actuelle du scroll
+      const scrollY = window.scrollY;
+      // Désactiver le scroll
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      document.body.style.overflow = 'hidden';
+
+      // Cleanup : réactiver le scroll quand la modale se ferme
+      return () => {
+        const scrollY = document.body.style.top;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        if (scrollY) {
+          window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
+      };
+    }
+  }, [selectedProject]);
 
   return (
     <div className="bg-white dark:bg-dark-950 pt-20 transition-colors duration-300">
@@ -344,21 +379,22 @@ export default function Projects() {
       <AnimatePresence>
         {selectedProject && (
           <motion.div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-start z-50 p-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
-              className="bg-white dark:bg-gray-950 rounded-3xl shadow-2xl max-w-6xl w-full max-h-[95vh] overflow-hidden"
+              className="bg-white dark:bg-gray-950 rounded-none shadow-2xl w-full max-w-full overflow-hidden flex flex-col absolute top-10"
+              style={{ width: '100vw', height: 'calc(100vh - 2rem)', maxWidth: '100%' }}
               initial={{ scale: 0.8, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.8, opacity: 0, y: 50 }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header with Close Button */}
-              <div className="relative p-6 border-b border-gray-200 dark:border-gray-700">
+              <div className="relative p-6 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
                 <button
                   onClick={() => setSelectedProject(null)}
                   className="absolute top-4 right-4 bg-gray-100 dark:bg-gray-950 rounded-full p-2 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
@@ -368,7 +404,7 @@ export default function Projects() {
               </div>
 
               {/* Content */}
-              <div className="p-6 max-h-[calc(100vh-8rem)] overflow-y-auto">
+              <div className="p-6 flex-1 overflow-y-auto">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                   {/* Image Gallery - Left Side */}
                   <div className="space-y-4">

@@ -38,6 +38,110 @@ export default function Home() {
     <div className="bg-gray-100 dark:bg-dark-950 transition-colors duration-300">
       {/* Hero Section */}
       <div className="relative isolate ">
+        {/* Icônes d'applications en arrière-plan - 6 principales */}
+        <div className="absolute inset-0 overflow-hidden -z-20">
+          {/* Figma */}
+          <motion.div
+            className="absolute top-32 left-10 text-4xl text-gray-400/30 dark:text-gray-500/40"
+            animate={{
+              y: [0, -20, 0],
+              rotate: [0, 5, -5, 0],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          >
+            <i className="fab fa-figma"></i>
+          </motion.div>
+
+          {/* React */}
+          <motion.div
+            className="absolute top-44 right-16 text-4xl text-gray-400/30 dark:text-gray-500/40"
+            animate={{
+              y: [0, 15, 0],
+              rotate: [0, -10, 10, 0],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.5
+            }}
+          >
+            <i className="fab fa-react"></i>
+          </motion.div>
+
+          {/* Node.js */}
+          <motion.div
+            className="absolute top-72 left-20 text-4xl text-gray-400/30 dark:text-gray-500/40"
+            animate={{
+              y: [0, -25, 0],
+              rotate: [0, 8, -8, 0],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1
+            }}
+          >
+            <i className="fab fa-node-js"></i>
+          </motion.div>
+
+          {/* JavaScript */}
+          <motion.div
+            className="absolute top-52 right-32 text-4xl text-gray-400/30 dark:text-gray-500/40"
+            animate={{
+              y: [0, 20, 0],
+              rotate: [0, -12, 12, 0],
+            }}
+            transition={{
+              duration: 3.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.8
+            }}
+          >
+            <i className="fab fa-js-square"></i>
+          </motion.div>
+
+          {/* Python */}
+          <motion.div
+            className="absolute top-92 left-32 text-4xl text-gray-400/30 dark:text-gray-500/40"
+            animate={{
+              y: [0, -18, 0],
+              rotate: [0, 6, -6, 0],
+            }}
+            transition={{
+              duration: 4.5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 1.2
+            }}
+          >
+            <i className="fab fa-python"></i>
+          </motion.div>
+
+          {/* GitHub */}
+          <motion.div
+            className="absolute top-57 right-48 text-4xl text-gray-400/30 dark:text-gray-500/40"
+            animate={{
+              y: [0, -22, 0],
+              rotate: [0, 10, -10, 0],
+            }}
+            transition={{
+              duration: 3.9,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 0.4
+            }}
+          >
+            <i className="fab fa-github"></i>
+          </motion.div>
+        </div>
+
         <div
           aria-hidden="true"
           className="absolute inset-x-0 -top-30 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"

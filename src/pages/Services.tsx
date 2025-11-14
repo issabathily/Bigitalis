@@ -1,20 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
-  Globe, 
-  Smartphone, 
-  Code2, 
-  Brain, 
-  Database, 
-  Shield,
+import {
   ArrowRight,
-  CheckCircle
+  CheckCircle,
 } from 'lucide-react';
 
 const services = [
   {
-    icon: Globe,
     title: 'Création de Sites Web',
     description: 'Sites web modernes, responsives et optimisés pour votre présence digitale.',
     features: [
@@ -26,7 +19,6 @@ const services = [
     color: 'blue',
   },
   {
-    icon: Smartphone,
     title: 'Applications Mobiles',
     description: 'Applications iOS et Android natives ou hybrides pour toucher vos clients.',
     features: [
@@ -39,7 +31,6 @@ const services = [
     color: 'green',
   },
   {
-    icon: Code2,
     title: 'Logiciels Sur Mesure',
     description: 'Solutions logicielles personnalisées adaptées à vos besoins spécifiques .',
     features: [
@@ -52,7 +43,6 @@ const services = [
     color: 'purple',
   },
   {
-    icon: Brain,
     title: 'Intelligence Artificielle',
     description: 'Intégration IA et machine learning pour automatiser vos processus.',
     features: [
@@ -65,7 +55,6 @@ const services = [
     color: 'pink',
   },
   {
-    icon: Database,
     title: 'Analyse de Données',
     description: 'Transformez vos données en insights actionnables pour votre business.',
     features: [
@@ -78,17 +67,16 @@ const services = [
     color: 'indigo',
   },
   {
-    icon: Shield,
-    title: 'Sécurité & Maintenance',
-    description: 'Protection et maintenance continue de vos solutions digitales.',
+    title: 'Création d\'Affiches et Logos',
+    description: 'Design graphique professionnel pour renforcer votre identité visuelle et votre communication.',
     features: [
-      'Audits de sécurité réguliers',
-      'Sauvegardes automatisées',
-      'Mises à jour et correctifs',
-      'Support technique prioritaire',
+      'Création de logos uniques et mémorables',
+      'Design d\'affiches publicitaires impactantes',
+      'Charte graphique complète',
+      'Fichiers haute résolution inclus',
     ],
-    price: 'À partir de 200€/mois',
-    color: 'red',
+    price: 'À partir de 500€',
+    color: 'orange',
   },
 ];
 
@@ -124,6 +112,11 @@ const getColorClasses = (color: string, isDark: boolean = false) => {
       bg: isDark ? 'bg-red-900/20' : 'bg-red-100',
       text: 'text-red-500',
       hover: 'group-hover:bg-red-500',
+    },
+    orange: {
+      bg: isDark ? 'bg-orange-900/20' : 'bg-orange-100',
+      text: 'text-orange-500',
+      hover: 'group-hover:bg-orange-500',
     },
   };
   return colors[color as keyof typeof colors] || colors.blue;
@@ -166,12 +159,6 @@ export default function Services() {
                 viewport={{ once: true }}
                 whileHover={{ y: -5 }}
               >
-                {/* Icône en haut */}
-                <div className={`flex items-center justify-center w-16 h-16 ${getColorClasses(service.color, false).bg} dark:${getColorClasses(service.color, true).bg} rounded-xl ${getColorClasses(service.color, false).hover} transition-colors duration-300 mx-auto mb-6`}>
-                  <service.icon className={`w-8 h-8 ${getColorClasses(service.color, false).text} group-hover:text-white transition-colors duration-300`} />
-                </div>
-                
-                {/* Contenu en bas */}
                 <div className="space-y-4">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">{service.title}</h3>
                   <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{service.description}</p>
