@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Moon, Sun, Monitor, Globe, Code2, Zap, Mail, FileText, BarChart3, Settings } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import qrIcon from '/src/assets/logiciel/qr.ico';
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -16,7 +17,7 @@ export default function ThemeToggle() {
   const applications = [
     { 
       icon: null,
-      customIcon: '/src/assets/logiciel/qr.ico',
+      customIcon: qrIcon,
       name: 'QR Vision', 
       color: 'text-purple-500', 
       bgColor: 'bg-transparent',
