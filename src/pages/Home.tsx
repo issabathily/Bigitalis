@@ -1,30 +1,22 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
-  Globe, 
-  Database, 
-  Code2, 
+import { useState, useEffect } from 'react';
+import {
+  Globe,
+  Database,
+  Code2,
   ArrowRight,
   CheckCircle,
   Users,
   Award,
-  Zap,
-  UserPlus,
-  BarChart3,
-  Calendar
+  Zap
 } from 'lucide-react';
 import FAQ from '../components/FAQ';
 import web from "/src/assets/video/siteweb.mp4"
 import app from "/src/assets/video/mobiles.mp4"
 import logiciel from "/src/assets/video/logicieldesktop.mp4"
-import ia from   "/src/assets/video/ia.mp4"
-import React from "react";
-const stats = [
-  // { number: '150+', label: 'Projets Réalisés' },
-  // { number: '50+', label: 'Clients Satisfaits' },
-  // { number: '5+', label: 'Années d\'Expérience' },
-  // { number: '24/7', label: 'Support Technique' },
-];
+import ia from "/src/assets/video/ia.mp4"
+import heroImage from "/src/assets/image/hero.png"
 
 const features = [
   'Solutions 100% sur mesure',
@@ -33,7 +25,35 @@ const features = [
   'Technologies de pointe',
 ];
 
+// Hook personnalisé pour l'animation typewriter
+const useTypewriter = (text: string, speed: number = 100, startDelay: number = 0) => {
+  const [displayText, setDisplayText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isComplete, setIsComplete] = useState(false);
+
+  useEffect(() => {
+    const startTimeout = setTimeout(() => {
+      if (currentIndex < text.length) {
+        const timeout = setTimeout(() => {
+          setDisplayText(prev => prev + text[currentIndex]);
+          setCurrentIndex(prev => prev + 1);
+        }, speed);
+        return () => clearTimeout(timeout);
+      } else {
+        setIsComplete(true);
+      }
+    }, startDelay);
+
+    return () => clearTimeout(startTimeout);
+  }, [currentIndex, text, speed, startDelay]);
+
+  return { displayText, isComplete };
+};
+
 export default function Home() {
+  // Animation typewriter pour "Solutions Digitales" - ultra rapide
+  const { displayText, isComplete } = useTypewriter('Solutions Digitales', 25, 300);
+
   return (
     <div className="bg-gray-100 dark:bg-dark-950 transition-colors duration-300">
       {/* Hero Section */}
@@ -154,94 +174,126 @@ export default function Home() {
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-orange-400 to-orange-600 opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
         </div>
-        
-        <div className="mx-auto max-w-2xl py-32 sm:py-28 lg:py-44">
-          <motion.div 
-            className="hidden sm:mb-8 sm:flex sm:justify-center"
+
+        <br />
+        <div className="mx-auto max-w-7xl pt-16 sm:pt-20 lg:pt-24 pb-0 px-4 sm:px-6 lg:px-8">
+          {/* Badge centré au-dessus de tout */}
+          <motion.div
+            className="mb-8 sm:mb-10 flex justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20 transition-all duration-300">
-              Découvrez nos dernières innovations technologiques.{' '}
+            <div className="relative rounded-full px-4 py-2 text-xs sm:text-sm leading-6 text-gray-600 dark:text-gray-300 ring-1 ring-gray-900/10 dark:ring-gray-100/20 hover:ring-gray-900/20 dark:hover:ring-gray-100/30 transition-all duration-300">
+              <span className="hidden sm:inline">Découvrez nos dernières innovations technologiques.{' '}</span>
               <Link to="/projects" className="font-semibold text-orange-500 hover:text-orange-600">
-                <span aria-hidden="true" className="absolute inset-0" />
-                Voir nos projets <span aria-hidden="true">&rarr;</span>
+                <span className="sm:hidden">Nos dernières innovations</span>
+                <span className="hidden sm:inline">Voir nos projets</span>
+                <span aria-hidden="true" className="ml-1">&rarr;</span>
               </Link>
             </div>
           </motion.div>
-          
-          <div className="text-center">
-            <motion.h1 
-              className="text-5xl font-bold tracking-tight text-balance text-gray-900 dark:text-white sm:text-7xl"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <motion.span
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="inline-block"
-              >
-                Solutions Digitales
-              </motion.span>
-              <motion.span 
-                className="text-orange-500 block"
-                initial={{ opacity: 0, x: 50, scale: 0.8 }}
-                animate={{ opacity: 1, x: 0, scale: 1 }}
-                transition={{ 
-                  duration: 0.8, 
-                  delay: 0.8,
-                  type: "spring",
-                  stiffness: 100,
-                  damping: 10
-                }}
-                whileHover={{ 
-                  scale: 1.05,
-                  transition: { duration: 0.2 }
-                }}
-              >
-                Innovantes
-              </motion.span>
-            </motion.h1>
-            
-            <motion.p 
-              className="mt-8 text-lg font-medium text-pretty text-gray-600 dark:text-white sm:text-xl/8"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              Chez Bigitalis, nous transformons vos idées en solutions digitales performantes. 
-              Développement web, applications mobiles, IA et analyse de données - votre réussite numérique commence ici.
-            </motion.p>
-            
-            <motion.div 
-              className="mt-10 flex items-center justify-center gap-x-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-                       <a
-  href="https://wa.me/221785309683"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-flex items-center space-x-2 bg-orange-500 hover:accent-green-600 text-white hover:text-black px-6 py-3 rounded-full font-semibold hover:bg-[#25d366] transition-all duration-300 transform hover:scale-105"
->
+          <br />
 
-  <span>Demander un devis </span>
-</a>
-              <Link 
-                to="/services" 
-                className="text-sm font-semibold dark:text-orange-500 transition-colors group"
-              >
-                Découvrir nos services 
-                <ArrowRight className="inline w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-              </Link>
+          {/* Layout Flex pour Desktop, Vertical pour Mobile */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+
+            {/* Colonne Gauche - Contenu Texte */}
+            <div className="order-2 lg:order-1">
+              <div className="text-center lg:text-left">
+                <motion.h1
+                  className="text-4xl sm:text-5xl font-bold tracking-tight text-balance text-gray-900 dark:text-white lg:text-6xl"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <span className="inline-block">
+                    {displayText}
+                    {!isComplete && (
+                      <span
+                        className="cursor-blink inline-block"
+                        style={{
+                          borderLeft: '2px solid #f97316',
+                          height: '1em',
+                          marginLeft: '4px'
+                        }}
+                      ></span>
+                    )}
+                  </span>
+                  <motion.span
+                    className="text-orange-500 block mt-2"
+                    initial={{ opacity: 0, x: 50, scale: 0.8 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    transition={{
+                      duration: 0.8,
+                      delay: 0.8,
+                      type: "spring",
+                      stiffness: 100,
+                      damping: 10
+                    }}
+                    whileHover={{
+                      scale: 1.05,
+                      transition: { duration: 0.2 }
+                    }}
+                  >
+                    Innovantes
+                  </motion.span>
+                </motion.h1>
+
+                <motion.p
+                  className="mt-6 sm:mt-8 text-base sm:text-lg font-medium text-pretty text-gray-600 dark:text-gray-300 px-4 sm:px-0 lg:px-0 leading-relaxed sm:leading-8"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                  Chez Bigitalis, nous transformons vos idées en solutions digitales performantes.
+                  Développement web, applications mobiles, IA et analyse de données - votre réussite numérique commence ici.
+                </motion.p>
+
+                <motion.div
+                  className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-x-6 px-4 sm:px-0"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                >
+                  <a
+                    href="https://wa.me/221785309683"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 bg-orange-500 hover:accent-green-600 text-white hover:text-black px-6 py-3 rounded-full font-semibold hover:bg-[#25d366] transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  >
+                    <span>Demander un devis</span>
+                  </a>
+                  <Link
+                    to="/services"
+                    className="w-full sm:w-auto text-center sm:text-left text-sm font-semibold text-gray-900 dark:text-orange-500 transition-colors group inline-flex items-center justify-center"
+                  >
+                    Découvrir nos services
+                    <ArrowRight className="inline w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </motion.div>
+              </div>
+            </div>
+
+            {/* Colonne Droite - Image Hero */}
+            <motion.div
+              className="order-1 lg:order-2 flex justify-center"
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.8 }}
+            >
+              <div className="relative rounded-2xl overflow-hidden max-w-md lg:max-w-lg w-full">
+                <img
+                  src={heroImage}
+                  alt="Bigitalis - Solutions Digitales Innovantes"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
             </motion.div>
+
           </div>
         </div>
-        
+
         <div
           aria-hidden="true"
           className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
@@ -259,7 +311,7 @@ export default function Home() {
       {/* Services Section - Header */}
       <section className="py-24 sm:py-32 bg-gray-100 dark:bg-dark-950">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             className="mx-auto max-w-2xl text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -281,7 +333,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Column - Text Content */}
-            <motion.div 
+            <motion.div
               className="order-2 lg:order-1"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -292,20 +344,20 @@ export default function Home() {
                 <ArrowRight className="w-6 h-6 text-orange-500" />
                 <span className="text-orange-500 font-medium">Bigitalis.ai</span>
               </div>
-              
+
               <h2 className="text-3xl lg:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
                 Découvrez tout ce que nous pouvons{' '}
                 <span className="text-orange-500">automatiser</span> pour vous.
               </h2>
-              
+
               <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-8">
-                Chaque entreprise est unique. Voici comment nous aidons nos clients à gagner du temps et à se 
+                Chaque entreprise est unique. Voici comment nous aidons nos clients à gagner du temps et à se
                 concentrer sur ce qui compte :
               </p>
             </motion.div>
-            
+
             {/* Right Column - Automation Cards in Stair Layout */}
-            <motion.div 
+            <motion.div
               className="order-1 lg:order-2"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -385,13 +437,13 @@ export default function Home() {
                   </p>
                 </motion.div>
               </div>
-              
-          
+
+
             </motion.div>
           </div>
         </div>
       </section>
-<section className="py-24 sm:py-32 bg-gray-100 dark:bg-gray-950">
+      <section className="py-24 sm:py-32 bg-gray-100 dark:bg-gray-950">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <motion.div
             className="text-center mb-12"
@@ -596,7 +648,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Column - Text Content */}
-            <motion.div 
+            <motion.div
               className="order-2 lg:order-1"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -607,10 +659,10 @@ export default function Home() {
                 <span className="text-gray-900 dark:text-white">Création de</span> <span className="text-orange-500">Sites Web</span>
               </h3>
               <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6">
-                Sites web modernes, responsives et optimisés SEO pour votre présence digitale. 
+                Sites web modernes, responsives et optimisés SEO pour votre présence digitale.
                 Nous créons des expériences utilisateur exceptionnelles qui convertissent vos visiteurs en clients.
               </p>
-              
+
               <div className="space-y-4 mb-8">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
@@ -629,7 +681,7 @@ export default function Home() {
                   <span className="text-gray-700 dark:text-gray-300">Intégration CMS et e-commerce</span>
                 </div>
               </div>
-              
+
               <Link
                 to="/services"
                 className="inline-flex items-center bg-orange-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
@@ -638,9 +690,9 @@ export default function Home() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </motion.div>
-            
+
             {/* Right Column - Web Development Visual */}
-            <motion.div 
+            <motion.div
               className="order-1 lg:order-2"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -662,14 +714,14 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Video Content */}
                 <div className="bg-white dark:bg-dark-950 border border-orange-500/20 dark:border-orange-500/30 rounded-b-lg overflow-hidden">
-                  <video 
+                  <video
                     className="w-full h-auto"
-                    autoPlay 
-                    loop 
-                    muted 
+                    autoPlay
+                    loop
+                    muted
                     playsInline
                     controls={false}
                   >
@@ -688,7 +740,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Column - Text Content */}
-            <motion.div 
+            <motion.div
               className="order-2 lg:order-1"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -699,10 +751,10 @@ export default function Home() {
                 <span className="text-gray-900 dark:text-white">Applications</span> <span className="text-orange-500">Mobiles</span>
               </h3>
               <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6">
-                Applications iOS et Android natives ou hybrides pour toucher vos clients partout. 
+                Applications iOS et Android natives ou hybrides pour toucher vos clients partout.
                 Développement d'apps performantes avec une expérience utilisateur optimale.
               </p>
-              
+
               <div className="space-y-4 mb-8">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
@@ -721,7 +773,7 @@ export default function Home() {
                   <span className="text-gray-700 dark:text-gray-300">Publication sur App Store et Google Play</span>
                 </div>
               </div>
-              
+
               <Link
                 to="/services"
                 className="inline-flex items-center bg-orange-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
@@ -730,9 +782,9 @@ export default function Home() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </motion.div>
-            
+
             {/* Right Column - Mobile App Visual */}
-            <motion.div 
+            <motion.div
               className="order-1 lg:order-2"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -752,13 +804,13 @@ export default function Home() {
                           <div className="w-1 h-2 bg-white rounded-sm"></div>
                         </div>
                       </div>
-                      
+
                       {/* Video Content */}
-                      <video 
+                      <video
                         className="w-full h-full object-cover"
-                        autoPlay 
-                        loop 
-                        muted 
+                        autoPlay
+                        loop
+                        muted
                         playsInline
                         controls={false}
                       >
@@ -779,7 +831,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Column - Text Content */}
-            <motion.div 
+            <motion.div
               className="order-2 lg:order-1"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -790,10 +842,10 @@ export default function Home() {
                 <span className="text-gray-900 dark:text-white">Logiciels</span> <span className="text-orange-500">Sur Mesure</span>
               </h3>
               <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6">
-                Solutions logicielles personnalisées adaptées à vos besoins spécifiques. 
+                Solutions logicielles personnalisées adaptées à vos besoins spécifiques.
                 Développement d'applications métier pour optimiser vos processus internes.
               </p>
-              
+
               <div className="space-y-4 mb-8">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
@@ -812,7 +864,7 @@ export default function Home() {
                   <span className="text-gray-700 dark:text-gray-300">Formation et support technique</span>
                 </div>
               </div>
-              
+
               <Link
                 to="/services"
                 className="inline-flex items-center bg-orange-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
@@ -821,9 +873,9 @@ export default function Home() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </motion.div>
-            
+
             {/* Right Column - Software Dashboard Visual */}
-            <motion.div 
+            <motion.div
               className="order-1 lg:order-2"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -845,14 +897,14 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Video Content */}
                 <div className="bg-white dark:bg-dark-950 border border-orange-500/20 dark:border-orange-500/30 rounded-b-lg overflow-hidden">
-                  <video 
+                  <video
                     className="w-full h-auto"
-                    autoPlay 
-                    loop 
-                    muted 
+                    autoPlay
+                    loop
+                    muted
                     playsInline
                     controls={false}
                   >
@@ -871,7 +923,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Column - Text Content */}
-            <motion.div 
+            <motion.div
               className="order-2 lg:order-1"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -882,10 +934,10 @@ export default function Home() {
                 <span className="text-gray-900 dark:text-white">Intelligence</span> <span className="text-orange-500">Artificielle</span>
               </h3>
               <p className="text-lg leading-relaxed text-gray-600 dark:text-gray-300 mb-6">
-                Intégration IA et machine learning pour automatiser et optimiser vos processus. 
+                Intégration IA et machine learning pour automatiser et optimiser vos processus.
                 Solutions intelligentes qui transforment vos données en insights actionnables.
               </p>
-              
+
               <div className="space-y-4 mb-8">
                 <div className="flex items-center space-x-3">
                   <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
@@ -904,7 +956,7 @@ export default function Home() {
                   <span className="text-gray-700 dark:text-gray-300">Recommandations personnalisées</span>
                 </div>
               </div>
-              
+
               <Link
                 to="/services"
                 className="inline-flex items-center bg-orange-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-orange-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
@@ -913,9 +965,9 @@ export default function Home() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Link>
             </motion.div>
-            
+
             {/* Right Column - AI Visual */}
-            <motion.div 
+            <motion.div
               className="order-1 lg:order-2"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -924,11 +976,11 @@ export default function Home() {
             >
               <div className="relative">
                 {/* Video Content */}
-                <video 
+                <video
                   className="w-full h-auto rounded-2xl"
-                  autoPlay 
-                  loop 
-                  muted 
+                  autoPlay
+                  loop
+                  muted
                   playsInline
                   controls={false}
                 >
@@ -943,7 +995,7 @@ export default function Home() {
 
 
       {/* Stats Section */}
-    
+
 
       {/* Features Section */}
       <section className="py-24 sm:py-32 bg-gray-50 dark:bg-dark-950">
@@ -959,10 +1011,10 @@ export default function Home() {
                 Pourquoi choisir <span className="text-orange-500">Bigitalis</span> ?
               </h2>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                Notre approche combine expertise technique, innovation et accompagnement personnalisé 
+                Notre approche combine expertise technique, innovation et accompagnement personnalisé
                 pour garantir le succès de vos projets digitaux.
               </p>
-              
+
               <div className="space-y-4">
                 {features.map((feature, index) => (
                   <motion.div
@@ -979,7 +1031,7 @@ export default function Home() {
                 ))}
               </div>
             </motion.div>
-            
+
             <motion.div
               className="grid grid-cols-2 gap-6"
               initial={{ opacity: 0, x: 30 }}
@@ -1031,11 +1083,11 @@ export default function Home() {
               Prêt à transformer votre <span className="text-orange-500">vision</span> en réalité ?
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-10">
-              Contactez nos experts dès aujourd'hui pour discuter de votre projet 
+              Contactez nos experts dès aujourd'hui pour discuter de votre projet
               et recevoir un devis personnalisé gratuit.
             </p>
-            
-            <motion.div 
+
+            <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}

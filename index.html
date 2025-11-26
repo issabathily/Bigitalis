@@ -1,16 +1,84 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
   <head>
+    <!-- Encodage et affichage -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bigitalis - Solutions Digitales & Services Informatiques</title>
-    <meta name="description" content="Bigitalis, expert en solutions digitales : création de sites web, développement d'applications, logiciels sur mesure, analyse de données et intelligence artificielle." />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    
+    <!-- Titre et description SEO -->
+    <title>Bigitalis | Agence Digitale à Dakar - Développement Web & Solutions IT</title>
+    <meta name="description" content="Bigitalis, agence digitale à Dakar, spécialisée dans le développement web, applications mobiles, logiciels sur mesure, IA et solutions IT innovantes pour propulser votre entreprise à l'ère numérique." />
+    <meta name="keywords" content="agence digitale, développement web, application mobile, logiciel sur mesure, intelligence artificielle, référencement SEO, Sénégal, Dakar, création site web, développement application, solution digitale" />
+    <meta name="author" content="Bigitalis" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="geo.region" content="SN-DK" />
+    <meta name="geo.placename" content="Dakar" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="src/assets/image/img_1.png" sizes="32x32" />
+    <link rel="apple-touch-icon" sizes="180x180" href="src/assets/image/img_1.png" />
+    <link rel="shortcut icon" href="src/assets/image/img_1.png" />
+    <meta name="theme-color" content="#F97316" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://bigitalis.com/" />
+    <meta property="og:title" content="Bigitalis | Agence Digitale à Dakar - Développement Web & Solutions IT" />
+    <meta property="og:description" content="Découvrez nos solutions digitales sur mesure : sites web, applications mobiles, logiciels d'entreprise et intelligence artificielle. Votre partenaire tech à Dakar." />
+    <meta property="og:image" content="https://bigitalis.sn/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="Bigitalis" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@BigitalisSN" />
+    <meta name="twitter:creator" content="@BigitalisSN" />
+    <meta name="twitter:title" content="Bigitalis | Votre Partenaire Digital à Dakar" />
+    <meta name="twitter:description" content="Solutions digitales innovantes pour les entreprises sénégalaises. Développement web, applications mobiles et intelligence artificielle." />
+    <meta name="twitter:image" content="https://bigitalis.sn/twitter-card.jpg" />
+
+    <!-- Liens canoniques -->
+    <link rel="canonical" href="https://bigitalis.com/" />
+
+    <!-- Préchargement des ressources critiques -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="website icon" href="src/assets/image/img_1.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" media="print" onload="this.media='all'" />
+    
+    <!-- Préchargement de l'image d'accroche -->
+    <link rel="preload" as="image" href="src/assets/image/hero.png" />
+    
+    <!-- Balises structurées JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Bigitalis",
+      "url": "https://bigitalis.com",
+      "logo": "https://bigitalis.com/logo.png",
+      "description": "Agence digitale spécialisée dans le développement web, applications mobiles et solutions IT innovantes à Dakar, Sénégal.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Dakar",
+        "addressCountry": "SN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+221 78 530 96 83",
+        "contactType": "customer service",
+        "availableLanguage": ["French", "English"]
+      },
+      "sameAs": [
+        "https://www.facebook.com/bigitalis",
+        "https://www.linkedin.com/company/bigitalis",
+        "https://twitter.com/Bigitalis"
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

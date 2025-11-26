@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { 
+import {
   Users,
   Target,
   Award,
@@ -17,7 +17,7 @@ import issa from "/src/assets/image/issa.jpg"
 import moussa from "/src/assets/image/moussa.png"
 import sekou from "/src/assets/image/sekou.jpg"
 import aliou from "/src/assets/image/aliou.jpg"
-import fama from   "/src/assets/image/fama.jpg"
+import fama from "/src/assets/image/fama.jpg"
 
 const values = [
   {
@@ -66,7 +66,7 @@ const team = [
     role: 'Expert en Excel',
     description: 'Création de visuel Avancer avec les donnes.',
     image: aliou,
-  },{
+  }, {
     name: 'Fama Diop',
     role: 'Develloper Mobile et Community Manager',
     description: 'Creation application Perfortmant ',
@@ -94,26 +94,26 @@ export default function About() {
         <div className="mx-auto max-w-7xl px-6 lg:px-8 relative">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
             {/* Left Column - Text Content (Réduit) */}
-            <motion.div 
+            <motion.div
               className="order-2 lg:order-1 lg:col-span-2"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
               <h1 className="text-3xl lg:text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-4">
-                Nous changeons la façon dont les gens se 
+                Nous changeons la façon dont les gens se
                 <span className="text-orange-500 block">connectent</span>
               </h1>
               <p className="text-base leading-relaxed text-gray-600 dark:text-gray-300 mb-4">
-                Chez Bigitalis, nous croyons que la technologie doit servir l'humain. 
+                Chez Bigitalis, nous croyons que la technologie doit servir l'humain.
                 Notre mission est de créer des solutions digitales qui facilitent les connexions.
               </p>
               <p className="text-base leading-relaxed text-gray-600 dark:text-gray-300 mb-6">
                 Nous accompagnons les entreprises dans leur transformation
                 digitale avec passion, expertise et innovation.
               </p>
-              
-              <motion.div 
+
+              <motion.div
                 className="flex flex-col sm:flex-row gap-4"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -135,9 +135,9 @@ export default function About() {
                 </Link>
               </motion.div>
             </motion.div>
-            
+
             {/* Right Column - Images (Agrandi) */}
-            <motion.div 
+            <motion.div
               className="order-1 lg:order-2 lg:col-span-3"
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
@@ -147,13 +147,13 @@ export default function About() {
                 {/* Image unique centrée et agrandie */}
                 <div className="relative w-full h-full lg:w-[500px] lg:h-[550px] rounded-3xl overflow-hidden  p-2">
                   <div className="w-full h-full rounded-2xl overflow-hidden">
-                    <img 
+                    <img
                       src={equipe}
-                      alt="Équipe Bigitalis" 
+                      alt="Équipe Bigitalis"
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  
+
                   {/* Effet de bordure gradient */}
                   <div className="absolute inset-0 rounded-3xl  pointer-events-none"></div>
                 </div>
@@ -205,7 +205,7 @@ export default function About() {
       {/* Team Section */}
       <section className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             className="mx-auto max-w-2xl text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -219,30 +219,46 @@ export default function About() {
               Des experts passionnés qui transforment vos idées en solutions digitales exceptionnelles.
             </p>
           </motion.div>
-          
+
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {team.map((member, index) => (
-              <motion.div
-                key={member.name}
-                className="text-center group bg-white dark:text-white dark:bg-dark-950 border border-orange-500/20 dark:border-orange-500/30 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-500"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="relative mb-6">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-32 h-32 rounded-full mx-auto object-cover shadow-lg group-hover:shadow-xl transition-shadow duration-300"
-                  />
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-orange-500/20 to-transparent  opacity-100 transition-opacity duration-300"></div>
-                </div>
-                <h3 className="text-xl font-semibold dark:text-white text-gray-900 mb-2">{member.name}</h3>
-                <p className="text-orange-500 font-medium mb-3">{member.role}</p>
-                <p className="text-gray-600 leading-relaxed">{member.description}</p>
-              </motion.div>
-            ))}
+            {team.map((member, index) => {
+              // Créer le slug à partir du nom
+              const memberId = member.name.toLowerCase().trim().replace(/\s+/g, '-');
+
+              return (
+                <Link
+                  key={member.name}
+                  to={`/team/${memberId}`}
+                  className="block"
+                >
+                  <motion.div
+                    className="text-center group bg-white dark:text-white dark:bg-dark-950 border border-orange-500/20 dark:border-orange-500/30 rounded-2xl p-6 shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer hover:-translate-y-2"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="relative mb-6">
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        className="w-32 h-32 rounded-full mx-auto object-cover shadow-lg group-hover:shadow-xl transition-shadow duration-300"
+                      />
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-orange-500/20 to-transparent opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <h3 className="text-xl font-semibold dark:text-white text-gray-900 mb-2 group-hover:text-orange-500 transition-colors">{member.name}</h3>
+                    <p className="text-orange-500 font-medium mb-3">{member.role}</p>
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">{member.description}</p>
+                    <span className="inline-flex items-center text-orange-500 font-semibold text-sm group-hover:gap-2 transition-all">
+                      Voir le profil
+                      <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </motion.div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -72,4 +72,16 @@
   width: 200%;
 }
 
+/* Animation de clignotement pour le curseur typewriter */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
 
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Monitor, Sun, Moon, Globe, Code2, Database, Zap, Mail, FileText, BarChart3, Settings } from 'lucide-react';
+import { Moon, Sun, Monitor, Globe, Code2, Zap, Mail, FileText, BarChart3, Settings } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 
 export default function ThemeToggle() {
@@ -14,14 +14,16 @@ export default function ThemeToggle() {
   ];
 
   const applications = [
-    { icon: Globe, name: 'Sites Web', color: 'text-blue-500', bgColor: 'bg-blue-50 dark:bg-blue-900/20' },
-    { icon: Code2, name: 'Apps Mobile', color: 'text-green-500', bgColor: 'bg-green-50 dark:bg-green-900/20' },
-    { icon: Database, name: 'Logiciels', color: 'text-purple-500', bgColor: 'bg-purple-50 dark:bg-purple-900/20' },
-    { icon: Zap, name: 'IA & Automatisation', color: 'text-orange-500', bgColor: 'bg-orange-50 dark:bg-orange-900/20' },
-    { icon: Mail, name: 'Email Marketing', color: 'text-red-500', bgColor: 'bg-red-50 dark:bg-red-900/20' },
-    { icon: FileText, name: 'Documentation', color: 'text-indigo-500', bgColor: 'bg-indigo-50 dark:bg-indigo-900/20' },
-    { icon: BarChart3, name: 'Analytics', color: 'text-cyan-500', bgColor: 'bg-cyan-50 dark:bg-cyan-900/20' },
-    { icon: Settings, name: 'Configuration', color: 'text-gray-500', bgColor: 'bg-gray-50 dark:bg-gray-900/20' }
+    { 
+      icon: null,
+      customIcon: '/src/assets/logiciel/qr.ico',
+      name: 'QR Vision', 
+      color: 'text-purple-500', 
+      bgColor: 'bg-transparent',
+      href: '/src/assets/logiciel/QR Vision Setup 0.0.0.exe',
+      download: 'QR_Vision_Setup_0.0.0.exe',
+      isDownload: true
+    }
   ];
 
   return (
@@ -74,14 +76,16 @@ export default function ThemeToggle() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.3 }}
             >
-              <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Nos Services</h3>
-              <p className="text-xs text-gray-600 dark:text-gray-400">Découvrez nos solutions digitales</p>
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Téléchargement</h3>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Téléchargez notre logiciel QR Vision</p>
             </motion.div>
             
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 gap-3">
               {applications.map((app, index) => (
-                <motion.div
+                <motion.a
                   key={app.name}
+                  href={app.href}
+                  download={app.download}
                   initial={{ opacity: 0, y: 12, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   transition={{ 
@@ -89,29 +93,42 @@ export default function ThemeToggle() {
                     duration: 0.3,
                     ease: [0.16, 1, 0.3, 1]
                   }}
-                  className="flex flex-col items-center p-3 rounded-lg hover:bg-gray-50/80 dark:hover:bg-gray-700/50 transition-all duration-200 cursor-pointer group relative overflow-hidden"
+                  className={`flex flex-col items-center p-3 rounded-lg hover:bg-gray-50/80 dark:hover:bg-gray-700/50 transition-all duration-200 cursor-pointer group relative overflow-hidden ${app.isDownload ? 'download-link' : ''}`}
                   whileHover={{ 
                     scale: 1.02,
                     y: -2,
                     transition: { duration: 0.2 }
                   }}
                   whileTap={{ scale: 0.98 }}
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <div 
-                    className={`w-10 h-10 rounded-lg ${app.bgColor} flex items-center justify-center mb-2 group-hover:scale-110 transition-all duration-200 relative`}
-                    style={{
-                      boxShadow: 'inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1)'
-                    }}
+                    className="flex items-center justify-center mb-2 group-hover:scale-110 transition-all duration-200 relative"
                   >
-                    <app.icon className={`w-5 h-5 ${app.color} group-hover:scale-110 transition-transform duration-200`} />
+                    {app.isDownload && (
+                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-gray-800 z-10"></div>
+                    )}
+                    {app.customIcon ? (
+                      <img 
+                        src={app.customIcon} 
+                        alt={app.name} 
+                        className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200"
+                      />
+                    ) : app.icon ? (
+                      <app.icon className={`w-5 h-5 ${app.color} group-hover:scale-110 transition-transform duration-200`} />
+                    ) : null}
                   </div>
                   <span className="text-xs text-gray-700 dark:text-gray-300 text-center leading-tight group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-200">
                     {app.name}
+                    {app.isDownload && (
+                      <span className="block text-[10px] text-green-500 font-medium mt-0.5">Télécharger</span>
+                    )}
                   </span>
                   
                   {/* Effet de brillance au hover */}
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 -translate-x-full group-hover:translate-x-full" />
-                </motion.div>
+                </motion.a>
               ))}
             </div>
             
