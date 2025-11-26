@@ -5,14 +5,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M0M9R837XP"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M0M9R837XP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-  gtag('config', 'G-M0M9R837XP');
-</script>
+      // Configuration de base de Google Analytics avec consentement
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500 // Délai d'attente pour les mises à jour de consentement
+      });
+
+      // Configuration de Google Analytics avec anonymisation IP
+      gtag('config', 'G-M0M9R837XP', {
+        'anonymize_ip': true,
+        'allow_google_signals': false,
+        'allow_ad_personalization_signals': false
+      });
+    </script>
     <!-- Titre et description SEO -->
     <title>Bigitalis | Agence Digitale à Dakar - Développement Web & Solutions IT</title>
     <meta name="description" content="Bigitalis, agence digitale à Dakar, spécialisée dans le développement web, applications mobiles, logiciels sur mesure, IA et solutions IT innovantes pour propulser votre entreprise à l'ère numérique." />

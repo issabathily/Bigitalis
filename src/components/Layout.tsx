@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import logo from '/src/assets/image/logo.png';
 import NavigationProgress from './NavigationProgress';
 import ThemeToggle from './ThemeToggle';
+import CookieConsent from './CookieConsent';
 
 const navigation = [
   { name: 'Accueil', href: '/' },
@@ -27,6 +28,7 @@ export default function Layout({ children }: LayoutProps) {
   return (
     <div className="bg-white dark:bg-dark-950 min-h-screen transition-colors duration-300">
       <NavigationProgress />
+      <CookieConsent />
 
       {!isTeamMemberPage && (
         <header className="absolute inset-x-0 top-0 z-50">

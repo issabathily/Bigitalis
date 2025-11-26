@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Moon, Sun, Monitor, Globe, Code2, Zap, Mail, FileText, BarChart3, Settings } from 'lucide-react';
+import { Moon, Sun, Monitor } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import qrIcon from '/src/assets/logiciel/qr.ico';
+import DownloadModal from './DownloadModal';
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [showApps, setShowApps] = useState(false);
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
 
   const themes = [
     { key: 'system' as const, icon: Monitor, label: 'Système' },
@@ -21,9 +23,14 @@ export default function ThemeToggle() {
       name: 'QR Vision', 
       color: 'text-purple-500', 
       bgColor: 'bg-transparent',
-      href: '/src/assets/logiciel/QR Vision Setup 0.0.0.exe',
-      download: 'QR_Vision_Setup_0.0.0.exe',
-      isDownload: true
+      href: '#',
+      download: '',
+      isDownload: true,
+      onClick: (e: React.MouseEvent) => {
+        e.preventDefault();
+        setShowDownloadModal(true);
+        setShowApps(false);
+      }
     }
   ];
 
@@ -101,7 +108,7 @@ export default function ThemeToggle() {
                     transition: { duration: 0.2 }
                   }}
                   whileTap={{ scale: 0.98 }}
-                  target="_blank"
+                  onClick={app.onClick}
                   rel="noopener noreferrer"
                 >
                   <div 
@@ -110,15 +117,11 @@ export default function ThemeToggle() {
                     {app.isDownload && (
                       <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-gray-800 z-10"></div>
                     )}
-                    {app.customIcon ? (
-                      <img 
-                        src={app.customIcon} 
-                        alt={app.name} 
-                        className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200"
-                      />
-                    ) : app.icon ? (
-                      <app.icon className={`w-5 h-5 ${app.color} group-hover:scale-110 transition-transform duration-200`} />
-                    ) : null}
+                    <img 
+                      src={app.customIcon} 
+                      alt={app.name} 
+                      className="w-10 h-10 object-contain group-hover:scale-110 transition-transform duration-200"
+                    />
                   </div>
                   <span className="text-xs text-gray-700 dark:text-gray-300 text-center leading-tight group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-200">
                     {app.name}
@@ -171,6 +174,14 @@ export default function ThemeToggle() {
           </motion.div>
         )}
       </AnimatePresence>
+      
+      <DownloadModal 
+        isOpen={showDownloadModal} 
+        onClose={() => setShowDownloadModal(false)}
+        softwareName="QR Vision"
+        softwareVersion="1.0.0"
+        downloadUrl="/src/assets/logiciel/QR Vision Setup 0.0.0.exe"
+      />
     </div>
   );
 }
