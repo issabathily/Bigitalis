@@ -9,6 +9,7 @@ import About from './pages/About';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 import TeamMemberPortfolio from './pages/TeamMemberPortfolio';
+import DownloadQRVision from './pages/DownloadQRVision';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,6 +38,7 @@ function App() {
             <Route path="/team/:memberId" element={<TeamMemberPortfolio />} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/telecharger-qr-vision" element={<DownloadQRVision />} />
           </Routes>
         </Layout>
       </Router>

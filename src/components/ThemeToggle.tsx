@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Moon, Sun, Monitor } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useNavigate } from 'react-router-dom';
 import qrIcon from '/src/assets/logiciel/qr.ico';
-import DownloadModal from './DownloadModal';
-
+import logiciel from "/src/assets/logiciel/QR Vision Setup 0.0.0.exe"
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
   const [showApps, setShowApps] = useState(false);
-  const [showDownloadModal, setShowDownloadModal] = useState(false);
+  const navigate = useNavigate();
 
   const themes = [
     { key: 'system' as const, icon: Monitor, label: 'Système' },
@@ -28,8 +28,8 @@ export default function ThemeToggle() {
       isDownload: true,
       onClick: (e: React.MouseEvent) => {
         e.preventDefault();
-        setShowDownloadModal(true);
         setShowApps(false);
+        navigate('/telecharger-qr-vision');
       }
     }
   ];
@@ -174,14 +174,6 @@ export default function ThemeToggle() {
           </motion.div>
         )}
       </AnimatePresence>
-      
-      <DownloadModal 
-        isOpen={showDownloadModal} 
-        onClose={() => setShowDownloadModal(false)}
-        softwareName="QR Vision"
-        softwareVersion="1.0.0"
-        downloadUrl="/src/assets/logiciel/QR Vision Setup 0.0.0.exe"
-      />
     </div>
   );
 }
