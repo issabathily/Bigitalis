@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import logo from '/src/assets/image/logo.png';
 import NavigationProgress from './NavigationProgress';
 import ThemeToggle from './ThemeToggle';
 import CookieConsent from './CookieConsent';
-import WhatsAppFloat from './WhatsAppFloat';
 
 const navigation = [
   { name: 'Accueil', href: '/' },
@@ -17,25 +16,12 @@ const navigation = [
   { name: 'Contact', href: '/contact' },
 ];
 
-const servicesMenu = [
-  { name: 'Sites Web', href: '/contact', icon: '🌐', description: 'Sites modernes' },
-  { name: 'Apps Mobiles', href: '/contact', icon: '📱', description: 'iOS & Android' },
-  { name: 'Logiciels', href: '/contact', icon: '💻', description: 'Sur mesure' },
-  { name: 'Intelligence IA', href: '/contact', icon: '🤖', description: 'Machine Learning' },
-  { name: 'Data Analytics', href: '/contact', icon: '📊', description: 'Business Intel' },
-  { name: 'UI/UX Design', href: '/contact', icon: '🎨', description: 'Interfaces' },
-  { name: 'Logos', href: '/contact', icon: '✨', description: 'Identité visuelle' },
-  { name: 'Affiches', href: '/contact', icon: '🖼️', description: 'Print & Digital' },
-  { name: 'Graphisme', href: '/contact', icon: '🎭', description: 'Créations' },
-];
-
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const location = useLocation();
   const isTeamMemberPage = location.pathname.startsWith('/team/');
 
@@ -43,7 +29,6 @@ export default function Layout({ children }: LayoutProps) {
     <div className="bg-white dark:bg-dark-950 min-h-screen transition-colors duration-300">
       <NavigationProgress />
       <CookieConsent />
-      <WhatsAppFloat />
 
       {!isTeamMemberPage && (
         <header className="absolute inset-x-0 top-0 z-50">
@@ -56,7 +41,11 @@ export default function Layout({ children }: LayoutProps) {
             >
               <Link to="/" className="-m-1.5 p-1.5 flex items-center space-x-2">
                 <div className="flex  items-center justify-center w-[60px] h-[40px] rounded-lg overflow-hidden">
-                  <img src={logo} className="w-full h-full bg-orange " alt="Bigitalis" />
+                  <img
+                    src={logo}
+
+                    className="w-full h-full bg-orange "
+                  />
                 </div>
                 <span className="text-xl font-bold text-orange-500 dark:text-orange-400">Bigitalis</span>
               </Link>
@@ -79,102 +68,20 @@ export default function Layout({ children }: LayoutProps) {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              {navigation.map((item) => {
-                if (item.name === 'Services') {
-                  return (
-                    <div
-                      key={item.name}
-                      className="relative"
-                      onMouseEnter={() => setServicesDropdownOpen(true)}
-                      onMouseLeave={() => setServicesDropdownOpen(false)}
-                    >
-                      <Link
-                        to={item.href}
-                        className={`text-sm font-semibold transition-colors relative group flex items-center gap-1 ${location.pathname === item.href
-                            ? 'text-orange-500'
-                            : 'text-gray-900 dark:text-white hover:text-orange-500'
-                          }`}
-                      >
-                        {item.name}
-                        <ChevronDownIcon
-                          className={`w-4 h-4 transition-transform duration-300 ${servicesDropdownOpen ? 'rotate-180' : ''
-                            }`}
-                        />
-                        <span
-                          className={`absolute -bottom-1 left-0 h-0.5 bg-orange-500 transition-all duration-300 ${location.pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'
-                            }`}
-                        />
-                      </Link>
-
-                      <AnimatePresence>
-                        {servicesDropdownOpen && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: 10 }}
-                            transition={{ duration: 0.2 }}
-                            className="absolute top-full left-0 mt-2 w-[600px] bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden z-50"
-                          >
-                            <div className="p-4 grid grid-cols-3 gap-2">
-                              {servicesMenu.map((service) => (
-                                <Link
-                                  key={service.name}
-                                  to={service.href}
-                                  className="flex items-start gap-3 p-3 rounded-xl hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-all duration-200 group"
-                                >
-                                  <span className="text-2xl mt-0.5">{service.icon}</span>
-                                  <div className="flex-1">
-                                    <div className="font-semibold text-sm text-gray-900 dark:text-white group-hover:text-orange-500 transition-colors">
-                                      {service.name}
-                                    </div>
-                                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                                      {service.description}
-                                    </div>
-                                  </div>
-                                </Link>
-                              ))}
-                            </div>
-
-                            <div className="border-t border-gray-200 dark:border-gray-700 p-3 bg-gray-50 dark:bg-gray-800/50">
-                              <Link
-                                to="/services"
-                                className="flex items-center justify-center gap-2 text-sm font-semibold text-orange-500 hover:text-orange-600 transition-colors"
-                              >
-                                Voir tous les services
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth={2}
-                                    d="M9 5l7 7-7 7"
-                                  />
-                                </svg>
-                              </Link>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  );
-                }
-
-                return (
-                  <Link
-                    key={item.name}
-                    to={item.href}
-                    className={`text-sm font-semibold transition-colors relative group ${location.pathname === item.href
-                        ? 'text-orange-500'
-                        : 'text-gray-900 dark:text-white hover:text-orange-500'
-                      }`}
-                  >
-                    {item.name}
-                    <span
-                      className={`absolute -bottom-1 left-0 h-0.5 bg-orange-500 transition-all duration-300 ${location.pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'
-                        }`}
-                    />
-                  </Link>
-                );
-              })}
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  to={item.href}
+                  className={`text-sm font-semibold transition-colors relative group ${location.pathname === item.href
+                    ? 'text-orange-500'
+                    : 'text-gray-900 dark:text-white hover:text-orange-500'
+                    }`}
+                >
+                  {item.name}
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-orange-500 transition-all duration-300 ${location.pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`} />
+                </Link>
+              ))}
             </motion.div>
 
             <motion.div
@@ -212,6 +119,7 @@ export default function Layout({ children }: LayoutProps) {
                 transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                 className="h-full"
               >
+                {/* Header */}
                 <div className="flex items-center justify-between p-6 border-b border-gray-200/10 dark:border-gray-700/10">
                   <motion.div
                     initial={{ opacity: 0, x: -20 }}
@@ -220,7 +128,11 @@ export default function Layout({ children }: LayoutProps) {
                   >
                     <Link to="/" className="flex items-center space-x-3" onClick={() => setMobileMenuOpen(false)}>
                       <div className="flex items-center justify-center w-10 h-10 rounded-xl  shadow-lg">
-                        <img src={logo} className="w-6 h-6 object-cover" alt="Bigitalis" />
+                        <img
+                          src={logo}
+                          className="w-6 h-6 object-cover"
+                          alt="Bigitalis"
+                        />
                       </div>
                       <span className="text-xl font-bold bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent">
                         Bigitalis
@@ -243,6 +155,7 @@ export default function Layout({ children }: LayoutProps) {
                   </motion.button>
                 </div>
 
+                {/* Navigation */}
                 <div className="px-2 py-8">
                   <nav className="space-y-2">
                     {navigation.map((item, index) => (
@@ -256,23 +169,19 @@ export default function Layout({ children }: LayoutProps) {
                           to={item.href}
                           onClick={() => setMobileMenuOpen(false)}
                           className={`group relative flex items-center space-x-4 px-4 py-4 rounded-2xl font-semibold text-lg transition-all duration-300 ${location.pathname === item.href
-                              ? 'text-orange-500 bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/20 shadow-lg shadow-orange-500/10'
-                              : 'text-gray-700 dark:text-gray-300 hover:text-orange-500 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-800/50 dark:hover:to-gray-700/30'
+                            ? 'text-orange-500 bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/30 dark:to-orange-800/20 shadow-lg shadow-orange-500/10'
+                            : 'text-gray-700 dark:text-gray-300 hover:text-orange-500 hover:bg-gradient-to-r hover:from-gray-50 hover:to-gray-100 dark:hover:from-gray-800/50 dark:hover:to-gray-700/30'
                             }`}
                         >
-                          <div
-                            className={`w-2 h-2 rounded-full transition-all duration-300 ${location.pathname === item.href
-                                ? 'bg-orange-500 shadow-lg shadow-orange-500/50'
-                                : 'bg-gray-300 dark:bg-dark-950 group-hover:bg-orange-400'
-                              }`}
-                          />
+                          <div className={`w-2 h-2 rounded-full transition-all duration-300 ${location.pathname === item.href
+                            ? 'bg-orange-500 shadow-lg shadow-orange-500/50'
+                            : 'bg-gray-300 dark:bg-dark-950 group-hover:bg-orange-400'
+                            }`} />
                           <span className="flex-1">{item.name}</span>
-                          <div
-                            className={`w-6 h-6 rounded-full border-2 transition-all duration-300 ${location.pathname === item.href
-                                ? 'border-orange-500 bg-orange-500'
-                                : 'border-gray-300 dark:border-gray-600 group-hover:border-orange-400'
-                              }`}
-                          >
+                          <div className={`w-6 h-6 rounded-full border-2 transition-all duration-300 ${location.pathname === item.href
+                            ? 'border-orange-500 bg-orange-500'
+                            : 'border-gray-300 dark:border-gray-600 group-hover:border-orange-400'
+                            }`}>
                             {location.pathname === item.href && (
                               <motion.div
                                 className="w-full h-full rounded-full bg-white flex items-center justify-center"
@@ -290,6 +199,7 @@ export default function Layout({ children }: LayoutProps) {
                   </nav>
                 </div>
 
+                {/* Footer Actions */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-white/80 to-transparent dark:from-dark-900/80 backdrop-blur-sm border-t border-gray-200/10 dark:border-gray-700/10">
                   <motion.div
                     className="space-y-4"
@@ -318,11 +228,7 @@ export default function Layout({ children }: LayoutProps) {
                             transition={{ type: 'spring', stiffness: 400 }}
                           >
                             <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                              <path
-                                fillRule="evenodd"
-                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                clipRule="evenodd"
-                              />
+                              <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
                           </motion.div>
                         </span>
@@ -336,7 +242,9 @@ export default function Layout({ children }: LayoutProps) {
         </header>
       )}
 
-      <main>{children}</main>
+      <main>
+        {children}
+      </main>
 
       {!isTeamMemberPage && (
         <footer className="bg-gray-900 dark:bg-dark-950 text-white">
@@ -345,8 +253,13 @@ export default function Layout({ children }: LayoutProps) {
               <div className="col-span-2">
                 <div className="flex items-center space-x-2 mb-4">
                   <div className="flex items-center justify-center w-[80px] h-[50px] rounded-lg overflow-hidden">
-                    <img src={logo} className="w-full h-full object-cover" alt="Bigitalis" />
+                    <img
+                      src={logo}
+
+                      className="w-full h-full object-cover"
+                    />
                   </div>
+                  {/*<span className="text-xl w-[80px] h-[10]  font-bold">Bigitalis</span>*/}
                 </div>
                 <p className="text-gray-400 dark:text-gray-300 mb-4">
                   Votre partenaire de confiance pour toutes vos solutions digitales et services informatiques.
@@ -364,26 +277,10 @@ export default function Layout({ children }: LayoutProps) {
               <div>
                 <h3 className="text-lg font-semibold mb-4 text-white">Services</h3>
                 <ul className="space-y-2 text-gray-400 dark:text-gray-300">
-                  <li>
-                    <a href="/services" className="hover:text-orange-500 transition-colors">
-                      Développement Web
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/services" className="hover:text-orange-500 transition-colors">
-                      Applications Mobiles
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/services" className="hover:text-orange-500 transition-colors">
-                      Logiciels Sur Mesure
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/services" className="hover:text-orange-500 transition-colors">
-                      Analyse de Données
-                    </a>
-                  </li>
+                  <li><a href="/services" className="hover:text-orange-500 transition-colors">Développement Web</a></li>
+                  <li><a href="/services" className="hover:text-orange-500 transition-colors">Applications Mobiles</a></li>
+                  <li><a href="/services" className="hover:text-orange-500 transition-colors">Logiciels Sur Mesure</a></li>
+                  <li><a href="/services" className="hover:text-orange-500 transition-colors">Analyse de Données</a></li>
                 </ul>
               </div>
 
