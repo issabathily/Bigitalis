@@ -247,8 +247,8 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  Chez Bigitalis, nous transformons vos idées en solutions digitales performantes.
-                  Développement web, applications mobiles, IA et analyse de données - votre réussite numérique commence ici.
+                  Nous sommes une startup digitale basée à Dakar.
+                  Nous aidons les entreprises à créer des sites web et des solutions innovantes en IA et data pour améliorer leur visibilité et accélérer leur croissance.
                 </motion.p>
 
                 <motion.div
