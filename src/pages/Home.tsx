@@ -12,6 +12,7 @@ import {
   Zap
 } from 'lucide-react';
 import FAQ from '../components/FAQ';
+import ProjectCarousel from '../components/ProjectCarousel';
 import web from "/src/assets/video/siteweb.mp4"
 import app from "/src/assets/video/mobiles.mp4"
 import logiciel from "/src/assets/video/logicieldesktop.mp4"
@@ -998,7 +999,7 @@ export default function Home() {
 
 
       {/* Features Section */}
-      <section className="py-24 sm:py-32 bg-gray-50 dark:bg-dark-950">
+      {/* <section className="py-24 sm:py-32 bg-gray-50 dark:bg-dark-950">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -1064,7 +1065,10 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-      </section>
+      </section> */}
+
+      {/* Projects Carousel Section */}
+      <ProjectCarousel />
 
       {/* FAQ Section */}
       <FAQ />
